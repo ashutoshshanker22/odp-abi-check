@@ -1,0 +1,1265 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+    <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+    <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="keywords" content="ODP, current, changes, changelog" />
+    <meta name="description" content="Log of changes in the package" />
+    <link rel="stylesheet" type="text/css" href="../../../css/common.css" />
+    <link rel="stylesheet" type="text/css" href="../../../css/changelog.css" />
+    
+    
+    <title>
+        ODP current: changelog
+    </title>
+    
+    </head>
+
+<body>
+<table cellpadding='0' cellspacing='0'><tr><td align='center'><h1 class='tool'><a title='ABI tracker for ODP' href='../../../timeline/ODP/index.html' class='tool'>ABI<br/>Tracker</a></h1></td><td width='30px;'></td><td><h1>(ODP)</h1></td></tr></table><hr/>
+<br/>
+<br/>
+<h1>Changelog from Git</h1><br/><br/>
+<div class='changelog'>
+<pre class='wrap'>commit 4217fb8c3f0e83c9b675c0fc64e5d7380c227e6d
+Author: Petri Savolainen &lt;petri.savolainen@nokia.com&gt;
+Date:   2020-03-09 15:25:58 +0200
+
+    api: increment version to 1.23.4
+    
+    Increment API version number to reflect addition of the new
+    stash API.
+    
+    Signed-off-by: Petri Savolainen &lt;petri.savolainen@nokia.com&gt;
+    Reviewed-by: Matias Elo &lt;matias.elo@nokia.com&gt;
+
+commit cbad580f0787f26574c9084f6f847b64d8181ae1
+Author: Petri Savolainen &lt;petri.savolainen@nokia.com&gt;
+Date:   2020-03-12 13:04:42 +0200
+
+    api: improve doxygen module description
+    
+    The first line after @defgroup tag shows up in doxygen module
+    summary page. Add missing descriptions and improve current
+    ones.
+    
+    Signed-off-by: Petri Savolainen &lt;petri.savolainen@nokia.com&gt;
+    Reviewed-by: Matias Elo &lt;matias.elo@nokia.com&gt;
+
+commit 4229542d18a8beed3e24f8b7c83b275b60b38a81
+Author: Petri Savolainen &lt;petri.savolainen@nokia.com&gt;
+Date:   2020-03-11 17:00:58 +0200
+
+    validation: init: test stash flag in features
+    
+    Signed-off-by: Petri Savolainen &lt;petri.savolainen@nokia.com&gt;
+    Reviewed-by: Matias Elo &lt;matias.elo@nokia.com&gt;
+
+commit 8ffb1463da292d91bdc2b06ceaa28524347da1b8
+Author: Petri Savolainen &lt;petri.savolainen@nokia.com&gt;
+Date:   2020-03-11 16:58:34 +0200
+
+    api: feature: add stash API into features
+    
+    Signed-off-by: Petri Savolainen &lt;petri.savolainen@nokia.com&gt;
+    Reviewed-by: Matias Elo &lt;matias.elo@nokia.com&gt;
+
+commit 2dfe3b83a8915da0fea837a16631ed506ffbb6f4
+Author: Petri Savolainen &lt;petri.savolainen@nokia.com&gt;
+Date:   2020-02-27 13:53:53 +0200
+
+    validation: stash: add tests for the new API
+    
+    Signed-off-by: Petri Savolainen &lt;petri.savolainen@nokia.com&gt;
+    Reviewed-by: Stanislaw Kardach &lt;skardach@marvell.com&gt;
+    Reviewed-by: Matias Elo &lt;matias.elo@nokia.com&gt;
+
+commit 53bf0a1cd53a6a5c768ea482a2128fd7a82d132e
+Author: Petri Savolainen &lt;petri.savolainen@nokia.com&gt;
+Date:   2020-02-21 14:52:53 +0200
+
+    linux-gen: stash: implement the new API
+    
+    Both stash types are implemented using the same, multi-thread
+    safe ring implementation that is used already by pools and
+    queues.
+    
+    Signed-off-by: Petri Savolainen &lt;petri.savolainen@nokia.com&gt;
+    Reviewed-by: Stanislaw Kardach &lt;skardach@marvell.com&gt;
+    Reviewed-by: Matias Elo &lt;matias.elo@nokia.com&gt;
+
+commit 58e145acd55fc7a8f63c506e857d3fe8b311c422
+Author: Petri Savolainen &lt;petri.savolainen@nokia.com&gt;
+Date:   2020-02-10 15:20:33 +0200
+
+    api: stash: add new object stash API
+    
+    Application needs often store object handles for later usage.
+    From current APIs, e.g. buffers and queues could be used to
+    store these handles, but buffers consume more memory than
+    is necessary and event queues are not needed for this simple
+    use case. This new API maybe implemented e.g. as a ring of
+    object handles in memory, or with a HW buffer manager.
+    
+    Signed-off-by: Petri Savolainen &lt;petri.savolainen@nokia.com&gt;
+    Reviewed-by: Stanislaw Kardach &lt;skardach@marvell.com&gt;
+    Reviewed-by: Matias Elo &lt;matias.elo@nokia.com&gt;
+    Reviewed-by: Janne Peltonen &lt;janne.peltonen@nokia.com&gt;
+
+commit 7b25b58be4ecf706a88893a0de9b3f7bfe4d12d5
+Author: Matias Elo &lt;matias.elo@nokia.com&gt;
+Date:   2020-03-31 14:13:46 +0300
+
+    linux-gen: ipsec: allocate internal capability arrays dynamically
+    
+    Allocate internal authentication and cipher algorithm capability arrays
+    dynamically. Removes the need for MAX_CAPS define, which had to be manually
+    increased to support more algorithms.
+    
+    Signed-off-by: Matias Elo &lt;matias.elo@nokia.com&gt;
+    Reviewed-by: Petri Savolainen &lt;petri.savolainen@nokia.com&gt;
+
+commit 33b040805804868a35fc825d8ea11de7f08582fb
+Author: Matias Elo &lt;matias.elo@nokia.com&gt;
+Date:   2020-03-25 13:57:20 +0200
+
+    validation: scheduler: add new stress test
+    
+    New scheduler stress test creates the maximum number of scheduled queues
+    returned by odp_schedule_config_init(), fills them with events, and runs a
+    number of test scheduling rounds. The test is repeated for all scheduled
+    queue types.
+    
+    Signed-off-by: Matias Elo &lt;matias.elo@nokia.com&gt;
+    Reviewed-by: Petri Savolainen &lt;petri.savolainen@nokia.com&gt;
+
+commit adbd88e59121b3ed14ffb668a83e2be509e80cec
+Author: Matias Elo &lt;matias.elo@nokia.com&gt;
+Date:   2020-04-03 10:43:47 +0300
+
+    validation: scheduler: test odp_schedule_group_create() with non-zero mask
+    
+    Previously odp_schedule_group_create() was only tested with empty thread
+    masks.
+    
+    Signed-off-by: Matias Elo &lt;matias.elo@nokia.com&gt;
+    Reviewed-by: Petri Savolainen &lt;petri.savolainen@nokia.com&gt;
+    Suggested-by: Carl Wallen &lt;carl.wallen@nokia.com&gt;
+
+commit 6bd9064bc88826c7377c3d384c14edb7d539eab4
+Author: Matias Elo &lt;matias.elo@nokia.com&gt;
+Date:   2020-04-01 10:56:14 +0300
+
+    travis: add ubuntu 20.04 arm64 build test
+    
+    Add arm64 build only test for Ubuntu 20.04. Uses GCC 9 and Clang 10.
+    
+    Signed-off-by: Matias Elo &lt;matias.elo@nokia.com&gt;
+    Reviewed-by: Petri Savolainen &lt;petri.savolainen@nokia.com&gt;
+
+commit 8f87f698c0b126bd565fc4f984081f92f7e15beb
+Author: Matias Elo &lt;matias.elo@nokia.com&gt;
+Date:   2020-03-24 11:31:52 +0200
+
+    linux-gen: socket_mmap: check only relevant TX ring header status bits
+    
+    Newer kernels (e.g. Ubuntu 19.10 - 5.3.0) may set packet timestamp bits
+    on causing the pktio to think the TX slot is not available. Fix this by
+    checking only the relevant TX ring header bits.
+    
+    Signed-off-by: Matias Elo &lt;matias.elo@nokia.com&gt;
+    Reviewed-by: Petri Savolainen &lt;petri.savolainen@nokia.com&gt;
+    Reported-by: Jari Mustajärvi &lt;jari.mustajarvi@nokia-bell-labs.com&gt;
+
+commit 2f226e691e6b208f662f0573d100f3300fd94161
+Author: Matias Elo &lt;matias.elo@nokia.com&gt;
+Date:   2020-03-13 15:28:12 +0200
+
+    validation: pool: add test for packet pool seg_len parameter
+    
+    Verify that enough packets (length='odp_pool_param_t.pkt.len') can be
+    allocated from a packet pool and the segment length matches when
+    'odp_pool_param_t.pkt.seg_len' is used.
+    
+    Signed-off-by: Matias Elo &lt;matias.elo@nokia.com&gt;
+    Reviewed-by: Petri Savolainen &lt;petri.savolainen@nokia.com&gt;
+
+commit 6d1286c405a482e5ab13e0f1b24097acb3c5b208
+Author: Stanislaw Kardach &lt;skardach@marvell.com&gt;
+Date:   2020-03-12 12:26:56 +0100
+
+    validation: packet: fix max_num expectations
+    
+    Some tests are missing params.pkt.max_num value and yet expect that no
+    more than params.pkt.num packets will be present in the pool. That is
+    not required by spec. Instead max_num parameter should be used for that.
+    
+    Signed-off-by: Stanislaw Kardach &lt;skardach@marvell.com&gt;
+    Reviewed-by: Matias Elo &lt;matias.elo@nokia.com&gt;
+
+commit 464dbbc2088b7dd54c29305e7ae9d4206b518c00
+Author: Petri Savolainen &lt;petri.savolainen@nokia.com&gt;
+Date:   2020-03-13 14:46:01 +0200
+
+    test: packet_gen: add VLAN option
+    
+    Added -v option to insert VLAN(s) into the packets. VLAN header
+    TPID and TCI fields (&lt;tpid&gt;:&lt;tci&gt;) are defined in hexadecimal.
+    Multiple VLANs may be stacked with a comma separated list,
+    starting from the outer most VLAN.
+    
+    Signed-off-by: Petri Savolainen &lt;petri.savolainen@nokia.com&gt;
+    Reviewed-by: Matias Elo &lt;matias.elo@nokia.com&gt;
+
+commit 6e4f04c5e8e6221d59fbdd858aa38b1456a23e3c
+Author: Matias Elo &lt;matias.elo@nokia.com&gt;
+Date:   2020-02-27 10:23:55 +0200
+
+    travis: add ubuntu 20.04 test
+    
+    Enables GCC 9.2 and Clang 9 testing.
+    
+    Signed-off-by: Matias Elo &lt;matias.elo@nokia.com&gt;
+    Reviewed-by: Petri Savolainen &lt;petri.savolainen@nokia.com&gt;
+
+commit a6710cc8a638ff11a5d82dec215c072a1fa02e1c
+Author: Matias Elo &lt;matias.elo@nokia.com&gt;
+Date:   2020-03-03 15:38:44 +0200
+
+    validation: pktio: remove unnecessary test start-up input flushes
+    
+    Each test cleans input queues afterwards, so start-up flushing is
+    unnecessary.
+    
+    Signed-off-by: Matias Elo &lt;matias.elo@nokia.com&gt;
+    Reviewed-by: Petri Savolainen &lt;petri.savolainen@nokia.com&gt;
+
+commit 48b984c2306a701205e2ea5e21ef93d876b977f2
+Author: Matias Elo &lt;matias.elo@nokia.com&gt;
+Date:   2020-03-03 15:34:10 +0200
+
+    validation: pktio: make pktio_check_start_stop() test conditional
+    
+    Add ODP_PKTIO_TEST_DISABLE_START_STOP environment variable for disabling
+    pktio_check_start_stop() validation test.
+    
+    Pcap (libpcap &gt;= 1.9.1) pktio devices cannot pass this test since the input
+    file cannot be written to after the first EOF read.
+    
+    Signed-off-by: Matias Elo &lt;matias.elo@nokia.com&gt;
+    Reviewed-by: Petri Savolainen &lt;petri.savolainen@nokia.com&gt;
+
+commit f0ad264bd9dc0a6b738ca6abbbd5ebbd94dcc752
+Author: Matias Elo &lt;matias.elo@nokia.com&gt;
+Date:   2020-03-03 09:12:10 +0200
+
+    validation: pktio: decrease timeout in odp_pktin_recv_tmo() test
+    
+    Previously the receive timeout tests would wait in practise indefinitely if
+    all test packets were not received correctly.
+    
+    Signed-off-by: Matias Elo &lt;matias.elo@nokia.com&gt;
+    Reviewed-by: Petri Savolainen &lt;petri.savolainen@nokia.com&gt;
+
+commit e03869671c6f2a2aca31101b3d18e3ac2078e40a
+Author: Matias Elo &lt;matias.elo@nokia.com&gt;
+Date:   2020-02-27 13:17:30 +0200
+
+    test: sched_latency: add option to select event forwarding mode
+    
+    Add new command line option (-f) to the scheduling latency test to select
+    event forwarding mode. The options are:
+            0: Target queue mapping table is randomized at startup (static seed)
+            1: Increment queue id by one
+            2: Back to the source queue
+    
+    Signed-off-by: Matias Elo &lt;matias.elo@nokia.com&gt;
+    Reviewed-by: Petri Savolainen &lt;petri.savolainen@nokia.com&gt;
+
+commit 89b862157e0a3ddf67fc93daca7a66f066c09854
+Author: Matias Elo &lt;matias.elo@nokia.com&gt;
+Date:   2020-02-25 16:04:53 +0200
+
+    test: sched_perf: improve test reliability
+    
+    Changed scheduling performance test logic to always schedule the same
+    number of events to each worker. Previously, if some worker didn't receive
+    any events the printed total average results were invalid.
+    
+    Signed-off-by: Matias Elo &lt;matias.elo@nokia.com&gt;
+    Reviewed-by: Petri Savolainen &lt;petri.savolainen@nokia.com&gt;
+
+commit 3da760a3808179c0e031950ac6d0e1f9790a30ef
+Author: Petri Savolainen &lt;petri.savolainen@nokia.com&gt;
+Date:   2020-03-02 09:32:03 +0200
+
+    test: packet_gen: fix build with GCC 9
+    
+    Ensure that destination string is null terminated by passing
+    size - 1 to strncpy. Strncpy copies all n chars to the destination
+    string if the source is longer than the destination.
+    
+    error: 'strncpy' specified bound 24 equals destination size
+    
+    Fixes: https://github.com/OpenDataPlane/odp/issues/930
+    
+    Signed-off-by: Petri Savolainen &lt;petri.savolainen@nokia.com&gt;
+    Reviewed-by: Matias Elo &lt;matias.elo@nokia.com&gt;
+
+commit 519555018eb8beeaf8bbd704d0d24b60eddf4d20
+Author: Matias Elo &lt;matias.elo@nokia.com&gt;
+Date:   2020-02-25 16:16:29 +0200
+
+    example: don't enable input hashing with only one input queue
+    
+    Signed-off-by: Matias Elo &lt;matias.elo@nokia.com&gt;
+    Reviewed-by: Petri Savolainen &lt;petri.savolainen@nokia.com&gt;
+
+commit 1d09a45ec333bf237edff731e78fa1c68dc49092
+Author: Petri Savolainen &lt;petri.savolainen@nokia.com&gt;
+Date:   2020-02-20 16:49:04 +0200
+
+    test: packet_gen: test application during make check
+    
+    Packet_gen sends 500 packets through both loopback
+    interfaces. Test lasts 5 sec. In total 1000 packets are sent
+    and the same amount (or minus the last sent burst) should
+    be received. Test passes when at least 800 packets are
+    received.
+    
+    Signed-off-by: Petri Savolainen &lt;petri.savolainen@nokia.com&gt;
+    Reviewed-and-tested-by: Matias Elo &lt;matias.elo@nokia.com&gt;
+
+commit 831de57416098df6946d2eb97132fe236d0c7e42
+Author: Petri Savolainen &lt;petri.savolainen@nokia.com&gt;
+Date:   2020-02-12 15:28:50 +0200
+
+    test: packet_gen: new simple packet generator
+    
+    Added new simple and performance optimized packet generator.
+    It may be used e.g. in pair with l2fwd.
+    
+    Signed-off-by: Petri Savolainen &lt;petri.savolainen@nokia.com&gt;
+    Reviewed-and-tested-by: Matias Elo &lt;matias.elo@nokia.com&gt;
+
+commit 181773542664bddff206fedb62ba94c38118457d
+Author: Petri Savolainen &lt;petri.savolainen@nokia.com&gt;
+Date:   2020-02-12 15:31:28 +0200
+
+    test: timer_perf: fix help text
+    
+    Fixed copy-paste error from help text.
+    
+    Signed-off-by: Petri Savolainen &lt;petri.savolainen@nokia.com&gt;
+    Reviewed-and-tested-by: Matias Elo &lt;matias.elo@nokia.com&gt;
+
+commit 324a2a2c7c1a9d35323483b679eedfebcb310827
+Author: Matias Elo &lt;matias.elo@nokia.com&gt;
+Date:   2020-02-13 10:39:56 +0200
+
+    build: check if libatomic is needed for __atomic_compare_exchange_n
+    
+    Double wide __atomic_compare_exchange_n() is required by ipfragreass
+    example.
+    
+    Signed-off-by: Matias Elo &lt;matias.elo@nokia.com&gt;
+    Reviewed-by: Petri Savolainen &lt;petri.savolainen@nokia.com&gt;
+
+commit 9dc2dcff30a5bf8963b9947343cf79fe63013932
+Author: Matias Elo &lt;matias.elo@nokia.com&gt;
+Date:   2020-02-12 16:24:45 +0200
+
+    ci: use correct paths for pkg-config when cross compiling
+    
+    Signed-off-by: Matias Elo &lt;matias.elo@nokia.com&gt;
+    Reviewed-by: Petri Savolainen &lt;petri.savolainen@nokia.com&gt;
+
+commit f974cb930ffb6bc1f0084b23f8d2e877b75e44db
+Author: Matias Elo &lt;matias.elo@nokia.com&gt;
+Date:   2020-02-11 15:37:45 +0200
+
+    travis: change default ubuntu container version to 18.04
+    
+    Separate DPDK v18.11 test has been removed. DPDK v18.11 is used now by
+    default in Ubuntu 18.04 x86 builds. DPDK v17.11 is still used in Ubuntu
+    16.04 builds.
+    
+    Signed-off-by: Matias Elo &lt;matias.elo@nokia.com&gt;
+    Reviewed-by: Petri Savolainen &lt;petri.savolainen@nokia.com&gt;
+
+commit f1798c854568c4e521cf71842bb71e81a0904251
+Author: Matias Elo &lt;matias.elo@nokia.com&gt;
+Date:   2020-02-13 21:15:24 +0200
+
+    linux-gen: pcap: disable loop support in process mode
+    
+    Reopening pcap interface, which is needed to implemement loop support,
+    causes pcap internal failure in process mode.
+    
+    Signed-off-by: Matias Elo &lt;matias.elo@nokia.com&gt;
+    Reviewed-by: Petri Savolainen &lt;petri.savolainen@nokia.com&gt;
+
+commit 64b4c275b39373678eaad8294816e9937805de47
+Author: Petri Savolainen &lt;petri.savolainen@nokia.com&gt;
+Date:   2020-02-19 11:13:50 +0200
+
+    linux-gen: timer: fix timer pool create sync with inline timer scan
+    
+    Set highest_tp_idx only after timer pool has been fully initialized.
+    
+    Signed-off-by: Petri Savolainen &lt;petri.savolainen@nokia.com&gt;
+    Reviewed-by: Matias Elo &lt;matias.elo@nokia.com&gt;
+
+commit 2356affd7f5b0c96b66e9b6c3174175bbfa00bd1
+Author: Matias Elo &lt;matias.elo@nokia.com&gt;
+Date:   2020-02-06 09:27:47 +0200
+
+    linux-gen: pool: increase max segment length
+    
+    Enable creating larger single segment packets.
+    
+    Signed-off-by: Matias Elo &lt;matias.elo@nokia.com&gt;
+    Reviewed-by: Petri Savolainen &lt;petri.savolainen@nokia.com&gt;
+    Suggested-by: Jussi Kerttula &lt;jussi.kerttula@nokia.com&gt;
+
+commit 180f1403b12beab32715f10839d3248e7fecb46d
+Author: Matias Elo &lt;matias.elo@nokia.com&gt;
+Date:   2020-02-03 10:52:56 +0200
+
+    validation: packet: prevent test trying to allocate zero length packets
+    
+    Test packet_test_free_sp() would end up trying to allocate invalid zero
+    length packets if pool_capa.pkt.max_len was zero.
+    
+    The following packet_alloc_multi() call would then loop indefinitely since
+    error return value was not checked.
+    
+    Signed-off-by: Matias Elo &lt;matias.elo@nokia.com&gt;
+    Reviewed-by: Petri Savolainen &lt;petri.savolainen@nokia.com&gt;
+
+commit cf51a0805a265b74128cb1dd30acfa292240a28f
+Author: Matias Elo &lt;matias.elo@nokia.com&gt;
+Date:   2020-01-29 10:16:46 +0200
+
+    example: switch: add signal handler for SIGINT
+    
+    Add signal handler to perform clean exit.
+    
+    Signed-off-by: Matias Elo &lt;matias.elo@nokia.com&gt;
+    Reviewed-by: Petri Savolainen &lt;petri.savolainen@nokia.com&gt;
+
+commit bd1207ff72490a5000ab66281e0d10f566e0877d
+Author: Matias Elo &lt;matias.elo@nokia.com&gt;
+Date:   2020-01-28 16:40:17 +0200
+
+    example: switch: detect invalid and broadcast ethernet addresses
+    
+    Signed-off-by: Matias Elo &lt;matias.elo@nokia.com&gt;
+    Reviewed-by: Petri Savolainen &lt;petri.savolainen@nokia.com&gt;
+
+commit 42c37a8506151debd9be885d055b2c4dc8a93c1c
+Author: Matias Elo &lt;matias.elo@nokia.com&gt;
+Date:   2020-01-28 16:22:53 +0200
+
+    example: switch: print packet drop statistics
+    
+    Signed-off-by: Matias Elo &lt;matias.elo@nokia.com&gt;
+    Reviewed-by: Petri Savolainen &lt;petri.savolainen@nokia.com&gt;
+
+commit 8c6880ee093af5ed6bf2af54a1acadc7b2ba895f
+Author: Matias Elo &lt;matias.elo@nokia.com&gt;
+Date:   2020-01-27 17:10:14 +0200
+
+    example: switch: add 5 minute aging time to mac table entries
+    
+    Signed-off-by: Matias Elo &lt;matias.elo@nokia.com&gt;
+    Reviewed-by: Petri Savolainen &lt;petri.savolainen@nokia.com&gt;
+
+commit 321e53c0405ab300585ad66693a24942eefef62b
+Author: Matias Elo &lt;matias.elo@nokia.com&gt;
+Date:   2020-01-28 13:25:18 +0200
+
+    test: sched_latency: increase number of scheduling rounds
+    
+    Increase the default number of scheduling rounds to 100M. The number of
+    scheduling rounds can now be configured with '-d' command line option.
+    
+    Signed-off-by: Matias Elo &lt;matias.elo@nokia.com&gt;
+    Reviewed-by: Petri Savolainen &lt;petri.savolainen@nokia.com&gt;
+
+commit 90103b8a5dd627b8680e2fd7ff8380e6a4707ced
+Author: Matias Elo &lt;matias.elo@nokia.com&gt;
+Date:   2020-01-28 11:30:14 +0200
+
+    test: sched_latency: increase number of warm-up rounds
+    
+    Increase the default number of warm-up rounds to 100 to avoid possible
+    extra latency caused by scheduler startup.
+    
+    The number of warm-up rounds can now be configured with '-w' command line
+    option.
+    
+    Signed-off-by: Matias Elo &lt;matias.elo@nokia.com&gt;
+    Reviewed-by: Petri Savolainen &lt;petri.savolainen@nokia.com&gt;
+
+commit c9f7b34c7f0a4cadfabbd6733e3420a8adb8c322
+Author: Petri Savolainen &lt;petri.savolainen@nokia.com&gt;
+Date:   2020-01-20 15:30:38 +0200
+
+    api: increase version number to 1.23.3
+    
+    Incremented minor version number to reflect packet length
+    clarifications and addition of packet pool align parameter.
+    
+    Signed-off-by: Petri Savolainen &lt;petri.savolainen@nokia.com&gt;
+    Reviewed-by: Stanislaw Kardach &lt;skardach@marvell.com&gt;
+
+commit 3125f0621c170b5bd3b5f4e48d2c90c7d3d438b2
+Author: Petri Savolainen &lt;petri.savolainen@nokia.com&gt;
+Date:   2020-01-10 14:06:35 +0200
+
+    validation: packet: add packet alloc align test
+    
+    Added test case for the new packet align parameter.
+    
+    Signed-off-by: Petri Savolainen &lt;petri.savolainen@nokia.com&gt;
+    Reviewed-by: Stanislaw Kardach &lt;skardach@marvell.com&gt;
+
+commit a072a42095fdd2d7b85343007e34bc424bcf5032
+Author: Petri Savolainen &lt;petri.savolainen@nokia.com&gt;
+Date:   2020-01-10 13:39:38 +0200
+
+    linux-gen: pool: set packet pool max align capa
+    
+    Implement the new packet align pool parameter with minimal
+    changes. Packet pools are aligned always to the base align,
+    so all application requests up to that value are supported.
+    Base align can be changed through the config file.
+    
+    Signed-off-by: Petri Savolainen &lt;petri.savolainen@nokia.com&gt;
+    Reviewed-by: Stanislaw Kardach &lt;skardach@marvell.com&gt;
+
+commit f6cb2b6f9cd9c0218ec564f75a0cda543a4477ba
+Author: Petri Savolainen &lt;petri.savolainen@nokia.com&gt;
+Date:   2020-01-10 10:56:22 +0200
+
+    api: pool: add packet data align parameter
+    
+    Added packet pool parameter to request minimum data alignment
+    for user allocated packets. When user allocates a new packet
+    and fills in protocol headers, it's convenient that data
+    alignment does not need to be checked (and tuned) on each
+    allocated packet.
+    
+    Signed-off-by: Petri Savolainen &lt;petri.savolainen@nokia.com&gt;
+    Reviewed-by: Stanislaw Kardach &lt;skardach@marvell.com&gt;
+
+commit 4de501a5867b93394215b44d3df0e5488c256199
+Author: Matias Elo &lt;matias.elo@nokia.com&gt;
+Date:   2020-01-14 17:00:56 +0200
+
+    linux-gen: packet: don't allow creating zero length packets
+    
+    Packet API forbids creating zero length packets.
+    
+    Signed-off-by: Matias Elo &lt;matias.elo@nokia.com&gt;
+    Reported-by: Carl Wallen &lt;carl.wallen@nokia.com&gt;
+    Reviewed-by: Petri Savolainen &lt;petri.savolainen@nokia.com&gt;
+    Reviewed-by: Stanislaw Kardach &lt;skardach@marvell.com&gt;
+
+commit b3812d61817aadb18f989fa864481dec53d4570e
+Author: Matias Elo &lt;matias.elo@nokia.com&gt;
+Date:   2020-01-15 16:52:07 +0200
+
+    validation: ipsec: don't allocate zero length test packet
+    
+    Allocating packets of length zero is not allowed by the packet API.
+    
+    Also, fix some typos and abort tests after a failed test packet allocation
+    to prevent a seg fault.
+    
+    Signed-off-by: Matias Elo &lt;matias.elo@nokia.com&gt;
+    Reviewed-by: Petri Savolainen &lt;petri.savolainen@nokia.com&gt;
+    Reviewed-by: Stanislaw Kardach &lt;skardach@marvell.com&gt;
+
+commit 2e19fc517ec1c1c72d995d1a9c8abc56335e45c2
+Author: Matias Elo &lt;matias.elo@nokia.com&gt;
+Date:   2020-01-15 12:16:12 +0200
+
+    api: packet: clarify packet length function argument definitions
+    
+    Modify documentations of functions, which decrease packet length, to
+    clearly state what are the allowed values for length argument. This is done
+    to avoid creating zero length packets which are not allowed by the packet
+    API.
+    
+    Signed-off-by: Matias Elo &lt;matias.elo@nokia.com&gt;
+    Reviewed-by: Petri Savolainen &lt;petri.savolainen@nokia.com&gt;
+    Reviewed-by: Stanislaw Kardach &lt;skardach@marvell.com&gt;
+
+commit 29c9a342c4cbc4cc92686e6f324fe258afae6b9a
+Author: Matias Elo &lt;matias.elo@nokia.com&gt;
+Date:   2020-01-14 14:44:27 +0200
+
+    validation: shmem: fix printf format types for pointers
+    
+    Use correct printf format types to avoid potential problems on 32-bit
+    systems.
+    
+    Signed-off-by: Matias Elo &lt;matias.elo@nokia.com&gt;
+    Reviewed-by: Petri Savolainen &lt;petri.savolainen@nokia.com&gt;
+    Reported-and-tested-by: Peter Lauro &lt;lauro_konik@hotmail.com&gt;
+
+commit 8e3790b1a8f8b681e1af8f42dc3e403d3036a687
+Author: Matias Elo &lt;matias.elo@nokia.com&gt;
+Date:   2020-01-14 14:42:22 +0200
+
+    linux-gen: fix print failures on 32-bit systems
+    
+    Use correct printf format types to fix failures on 32-bit systems.
+    
+    Fixes: https://github.com/OpenDataPlane/odp/issues/915
+    
+    Signed-off-by: Matias Elo &lt;matias.elo@nokia.com&gt;
+    Reviewed-by: Petri Savolainen &lt;petri.savolainen@nokia.com&gt;
+    Reported-and-tested-by: Peter Lauro &lt;lauro_konik@hotmail.com&gt;
+
+commit 521c2ffc2116a1d2b15160e4546ff600b210c02d
+Author: Petri Savolainen &lt;petri.savolainen@nokia.com&gt;
+Date:   2020-01-03 17:02:08 +0200
+
+    api: increment version number to 1.23.2
+    
+    Increment API version number to reflect addition of
+    ODP_VERSION_API, ODP_VERSION_API_NUM and ODP_CACHE_LINE_ROUNDUP
+    macros.
+    
+    Signed-off-by: Petri Savolainen &lt;petri.savolainen@nokia.com&gt;
+    Reviewed-by: Stanislaw Kardach &lt;skardach@marvell.com&gt;
+
+commit 38c3db98e7aa2f7460e1c35a48ae744690c2c9da
+Author: Petri Savolainen &lt;petri.savolainen@nokia.com&gt;
+Date:   2020-01-03 17:00:20 +0200
+
+    validation: system: add test for ODP_CACHE_LINE_ROUNDUP
+    
+    Added validation test for the new API macro.
+    
+    Signed-off-by: Petri Savolainen &lt;petri.savolainen@nokia.com&gt;
+    Reviewed-by: Stanislaw Kardach &lt;skardach@marvell.com&gt;
+
+commit 26c85617f0d325932a0487e12e36e2e2d624e641
+Author: Petri Savolainen &lt;petri.savolainen@nokia.com&gt;
+Date:   2020-01-07 15:54:31 +0200
+
+    linux-gen: align: implement ODP_CACHE_LINE_ROUNDUP
+    
+    Implement the new ODP_CACHE_LINE_ROUNDUP macro
+    
+    Signed-off-by: Petri Savolainen &lt;petri.savolainen@nokia.com&gt;
+    Reviewed-by: Stanislaw Kardach &lt;skardach@marvell.com&gt;
+
+commit c45586b31cbada9f0c7ee9b894cecad85a056c7a
+Author: Petri Savolainen &lt;petri.savolainen@nokia.com&gt;
+Date:   2020-01-03 16:52:47 +0200
+
+    api: align: add cache line size round up macro
+    
+    Added macro for rounding up a value to the next multiple of
+    cache line size. This round up is needed e.g. when selecting
+    buffer sizes so that false sharing is avoided.
+    
+    Signed-off-by: Petri Savolainen &lt;petri.savolainen@nokia.com&gt;
+    Reviewed-by: Stanislaw Kardach &lt;skardach@marvell.com&gt;
+
+commit b64a3320751ebe0270f79ede2e9447ad49d28291
+Author: Petri Savolainen &lt;petri.savolainen@nokia.com&gt;
+Date:   2020-01-03 16:26:41 +0200
+
+    validation: system: add version macro test
+    
+    Added a test case for the new API version macros.
+    
+    Signed-off-by: Petri Savolainen &lt;petri.savolainen@nokia.com&gt;
+    Reviewed-by: Stanislaw Kardach &lt;skardach@marvell.com&gt;
+
+commit 33c264a3959cd1f40623920575f0aa72e74cc245
+Author: Petri Savolainen &lt;petri.savolainen@nokia.com&gt;
+Date:   2020-01-03 15:43:06 +0200
+
+    validation: system: call version string functions
+    
+    Call version string functions and print strings to log.
+    
+    Signed-off-by: Petri Savolainen &lt;petri.savolainen@nokia.com&gt;
+    Reviewed-by: Stanislaw Kardach &lt;skardach@marvell.com&gt;
+
+commit 9ac9778707a77ad908af955ca6ce94f4d706fbaa
+Author: Petri Savolainen &lt;petri.savolainen@nokia.com&gt;
+Date:   2020-01-03 15:21:29 +0200
+
+    api: version: add API version comparison macro
+    
+    Added macro and version number define for easier comparison
+    of API version numbers.
+    
+    Signed-off-by: Petri Savolainen &lt;petri.savolainen@nokia.com&gt;
+    Reviewed-by: Stanislaw Kardach &lt;skardach@marvell.com&gt;
+
+commit 3d2977c972cb3ba13c544d8ef9174852a1613b86
+Author: Stanislaw Kardach &lt;skardach@marvell.com&gt;
+Date:   2019-12-06 16:11:13 +0100
+
+    validation: scheduler: fix plain+sched test
+    
+    Whenever order locks are used, user should ensure that he follows the
+    same sequence of ordered locks when processing events that have to be
+    ordered. That includes a drain loop when scheduler is paused.
+    
+    Signed-off-by: Stanislaw Kardach &lt;skardach@marvell.com&gt;
+    Reviewed-by: Petri Savolainen &lt;petri.savolainen@nokia.com&gt;
+
+commit 5472754c47ed084413da2bc332f2c27a1f5d262a
+Author: Petri Savolainen &lt;petri.savolainen@nokia.com&gt;
+Date:   2020-01-03 13:36:42 +0200
+
+    test: sched_perf: add queue context data touch options
+    
+    Added -k and -l options to enable performance testing with
+    queue context data touch. Option -k controls the number of
+    (uint64_t) words to read from the queue context (on every
+    received event). Option -l controls the number of words
+    to read and write, after the read only words (-k option).
+    
+    In forwarding mode next queue handle is stored into the start of
+    the queue context.
+    
+    Signed-off-by: Petri Savolainen &lt;petri.savolainen@nokia.com&gt;
+    Reviewed-by: Matias Elo &lt;matias.elo@nokia.com&gt;
+
+commit 100609080dba160adbdfe1b221980f3e53a22b99
+Author: Petri Savolainen &lt;petri.savolainen@nokia.com&gt;
+Date:   2020-01-02 16:45:30 +0200
+
+    test: sched_perf: allocate queue context from shm
+    
+    Allocate queue context from SHM, so that its size can be
+    increased for context data touch testing.
+    
+    Signed-off-by: Petri Savolainen &lt;petri.savolainen@nokia.com&gt;
+    Reviewed-by: Matias Elo &lt;matias.elo@nokia.com&gt;
+
+commit d0ed94059842a4989801db33e18c035ff0db8c20
+Author: Petri Savolainen &lt;petri.savolainen@nokia.com&gt;
+Date:   2020-01-02 13:39:13 +0200
+
+    test: sched_perf: add data touch options
+    
+    Added -n and -m options to enable performance testing with
+    event payload data touch. Option -n controls the number of
+    (uint64_t) words to read from the start of payload data (on
+    each received event). Option -m controls the number of words
+    to read and write, after the read only words (-n option).
+    
+    Signed-off-by: Petri Savolainen &lt;petri.savolainen@nokia.com&gt;
+    Reviewed-by: Matias Elo &lt;matias.elo@nokia.com&gt;
+
+commit 75957b7458858069e3c4c765ada5d31840774dea
+Author: Matias Elo &lt;matias.elo@nokia.com&gt;
+Date:   2020-01-02 16:56:42 +0200
+
+    linux-gen: dpdk: fix rx/tx checksum offload
+    
+    The NIC offload capabilities stored in rte_eth_dev_info.rx_offload_capa/
+    tx_offload_capa cannot be used per NIC queue. Fix this by doing offload
+    configurarion using rte_eth_dev_configure().
+    
+    Signed-off-by: Matias Elo &lt;matias.elo@nokia.com&gt;
+    Reviewed-by: Petri Savolainen &lt;petri.savolainen@nokia.com&gt;
+
+commit 89f720ec7788d1eb139def78b0aafe26bf40f047
+Author: Matias Elo &lt;matias.elo@nokia.com&gt;
+Date:   2020-01-02 13:04:29 +0200
+
+    linux-gen: dpdk: add support for setting interface default mac address
+    
+    Signed-off-by: Matias Elo &lt;matias.elo@nokia.com&gt;
+    Reviewed-by: Petri Savolainen &lt;petri.savolainen@nokia.com&gt;
+
+commit cbc020f35245f21c2ea9cb3d3be55114322d3201
+Author: Petri Savolainen &lt;petri.savolainen@nokia.com&gt;
+Date:   2019-12-13 13:28:28 +0200
+
+    example: packet_dump: add VLAN support
+    
+    Print TPID and TCI fields of first two VLAN headers.
+    
+    Signed-off-by: Petri Savolainen &lt;petri.savolainen@nokia.com&gt;
+    Reviewed-by: Matias Elo &lt;matias.elo@nokia.com&gt;
+
+commit 54c7061b88f8b1ecac300f31c8ea4f5e4f6752ec
+Author: Petri Savolainen &lt;petri.savolainen@nokia.com&gt;
+Date:   2019-12-13 12:43:23 +0200
+
+    linux-gen: socket_mmap: recreate VLAN header
+    
+    Socket mmap interface in Linux may strip a VLAN header and
+    copy its TPID and TCI fields into tpacket2_hdr structure.
+    Insert VLAN header back into the packet when this happens.
+    
+    Signed-off-by: Petri Savolainen &lt;petri.savolainen@nokia.com&gt;
+    Reviewed-by: Matias Elo &lt;matias.elo@nokia.com&gt;
+    Reported-by: Jari Mustajärvi &lt;jari.mustajarvi@nokia-bell-labs.com&gt;
+
+commit 2a913b6531651d030b3e34731505846ff4e3aa6c
+Author: Petri Savolainen &lt;petri.savolainen@nokia.com&gt;
+Date:   2019-12-13 12:16:39 +0200
+
+    linux-gen: packet: move push_head and packet_data header
+    
+    Moved inline functions into header, so that those can be
+    used from socket mmap file.
+    
+    Signed-off-by: Petri Savolainen &lt;petri.savolainen@nokia.com&gt;
+    Reviewed-by: Matias Elo &lt;matias.elo@nokia.com&gt;
+
+commit 6b5254d30a5cc51b213a570e106ff5d866ee9db2
+Author: Petri Savolainen &lt;petri.savolainen@nokia.com&gt;
+Date:   2019-12-05 16:48:45 +0200
+
+    linux-gen: dpdk: print DPDK version
+    
+    Print DPDK version for logging purposes.
+    
+    Signed-off-by: Petri Savolainen &lt;petri.savolainen@nokia.com&gt;
+    Reviewed-by: Matias Elo &lt;matias.elo@nokia.com&gt;
+
+commit 0d7f3aee5a44976e47a868e4026cbaebf354d66d
+Author: Petri Savolainen &lt;petri.savolainen@nokia.com&gt;
+Date:   2019-12-05 16:28:09 +0200
+
+    linux-gen: dpdk: set MEMPOOL_F_NO_IOVA_CONTIG flag
+    
+    Zero-copy version crashed without this flag set, as some
+    mbufs in a pool did not have a valid pointer to data.
+    
+    Signed-off-by: Petri Savolainen &lt;petri.savolainen@nokia.com&gt;
+    Reviewed-by: Matias Elo &lt;matias.elo@nokia.com&gt;
+
+commit 1222d02368004285a381610bd3101a240cbf644a
+Author: Petri Savolainen &lt;petri.savolainen@nokia.com&gt;
+Date:   2019-11-29 15:39:21 +0200
+
+    linux-gen: dpdk: remove lcore role init
+    
+    Fix DPDK v19.11 build by removing rte_eal_get_configuration()
+    usage. CPU roles do not need to be initialized to ROLE_RTE, as
+    it is set as the default value for each CPU in
+    rte_eal_cpu_init().
+    
+    Signed-off-by: Petri Savolainen &lt;petri.savolainen@nokia.com&gt;
+    Reviewed-by: Matias Elo &lt;matias.elo@nokia.com&gt;
+
+commit c1b0347116dd0992634cc79d82831636e9ef6a4b
+Author: Petri Savolainen &lt;petri.savolainen@nokia.com&gt;
+Date:   2019-11-29 14:51:26 +0200
+
+    linux-gen: dpdk: improve check of promisc mode support
+    
+    Make check failed when using PCAP PMD device with DPDK
+    v19.11, as rte_eth_promiscuous_enable() is supported,
+    but rte_eth_promiscuous_disable() is not. Check both
+    return values to determine if promiscuous mode change is
+    supported.
+    
+    Signed-off-by: Petri Savolainen &lt;petri.savolainen@nokia.com&gt;
+    Reviewed-by: Matias Elo &lt;matias.elo@nokia.com&gt;
+
+commit 427d0bcf792637cb31828c5a84fcbd3202213350
+Author: Petri Savolainen &lt;petri.savolainen@nokia.com&gt;
+Date:   2019-11-29 14:47:02 +0200
+
+    linux-gen: dpdk: DPDK renamed protocol structs
+    
+    DPDK 19.08 renamed protocol structs with rte_ prefix. Use
+    correct struct names depending on the DPDK version.
+    
+    Signed-off-by: Petri Savolainen &lt;petri.savolainen@nokia.com&gt;
+    Reviewed-by: Matias Elo &lt;matias.elo@nokia.com&gt;
+
+commit 79bf86de3fa56ede873255e8bb34efb6035d8130
+Author: Petri Savolainen &lt;petri.savolainen@nokia.com&gt;
+Date:   2019-12-05 15:09:55 +0200
+
+    example: timer_acc: use shm for logs
+    
+    Use SHM instead of calloc for log memory. A log may be
+    fairly large (multiple MB) depending on the test case.
+    SHM uses huge pages (when available), which reduces
+    the risk of having page misses during the test.
+    
+    Signed-off-by: Petri Savolainen &lt;petri.savolainen@nokia.com&gt;
+    Reviewed-by: Matias Elo &lt;matias.elo@nokia.com&gt;
+
+commit be3fc1eb8da99c2c1a7a46d93ab572c39647c935
+Author: Petri Savolainen &lt;petri.savolainen@nokia.com&gt;
+Date:   2019-12-04 15:04:28 +0200
+
+    example: timer_acc: add burst gap option
+    
+    Added option (-g) to control offset (gap) between timers within
+    a burst. This way many periodic (restarted) timers can be tested
+    with different expiration times.
+    
+    Signed-off-by: Petri Savolainen &lt;petri.savolainen@nokia.com&gt;
+    Reviewed-by: Matias Elo &lt;matias.elo@nokia.com&gt;
+
+commit d742f6e7c93b9c17e138e4dad403934aebad6e2e
+Author: Matias Elo &lt;matias.elo@nokia.com&gt;
+Date:   2019-11-28 11:00:29 +0200
+
+    example: switch: disable IPv4 hashing
+    
+    Pure IPv4 hashing is not supported by all DPDK pktio drivers.
+    
+    Signed-off-by: Matias Elo &lt;matias.elo@nokia.com&gt;
+    Reviewed-by: Petri Savolainen &lt;petri.savolainen@nokia.com&gt;
+
+commit f6d90f60520bcb3f082fab55bc9d2140c22e5742
+Author: Matias Elo &lt;matias.elo@nokia.com&gt;
+Date:   2019-11-28 10:49:56 +0200
+
+    example: switch: change 'unsigned' variables to 'unsigned int'
+    
+    Fixes checkpatch's prefer 'unsigned int' to bare use of 'unsigned'
+    warnings.
+    
+    Signed-off-by: Matias Elo &lt;matias.elo@nokia.com&gt;
+    Reviewed-by: Petri Savolainen &lt;petri.savolainen@nokia.com&gt;
+
+commit b9002efa6e12fafc901794aa5f6a99ef306d944b
+Author: Matias Elo &lt;matias.elo@nokia.com&gt;
+Date:   2019-11-28 08:57:01 +0200
+
+    validation: buffer: allow allocted buffer size to be larger than requested
+    
+    Allocated buffer may be larger than what was requested in odp_pool_param_t.
+    
+    Fixed a segfault in buffer_test_pool_alloc_free() if a buffer check failed.
+    
+    Signed-off-by: Matias Elo &lt;matias.elo@nokia.com&gt;
+    Reviewed-by: Petri Savolainen &lt;petri.savolainen@nokia.com&gt;
+
+commit 4a2588b84a28424ce9c9a31c971a0d8678a0c066
+Author: Petri Savolainen &lt;petri.savolainen@nokia.com&gt;
+Date:   2019-11-26 10:12:01 +0200
+
+    example: timer_accur: add option to retry on too early error
+    
+    When running test in restart timer mode with a short period,
+    some timer set calls may return ODP_TIMER_TOOEARLY errors
+    e.g. due to delays from operating system interruptions. This
+    happens especially with absolute expiration time.
+    
+    Added -e option to specify how many times a timer restart is
+    retried when expiration time too early error is returned.
+    
+    Signed-off-by: Petri Savolainen &lt;petri.savolainen@nokia.com&gt;
+    Reviewed-by: Matias Elo &lt;matias.elo@nokia.com&gt;
+
+commit 448100358c09d61f3fd8d137454b6bc45396a233
+Author: Petri Savolainen &lt;petri.savolainen@nokia.com&gt;
+Date:   2019-11-22 15:33:31 +0200
+
+    example: timer_accur: add output file option
+    
+    Added optio to output measurement samples into a log file.
+    
+    Signed-off-by: Petri Savolainen &lt;petri.savolainen@nokia.com&gt;
+    Reviewed-by: Matias Elo &lt;matias.elo@nokia.com&gt;
+
+commit 1b103ac26cf40df3c091c344418881c6013669da
+Author: Petri Savolainen &lt;petri.savolainen@nokia.com&gt;
+Date:   2019-11-22 11:08:21 +0200
+
+    example: timer_accur: add mode option
+    
+    Added --mode option to choose if all timers are set during test
+    init, or reset after expiration. The latter allows running the
+    test for a long time with a low number of timers allocated.
+    
+    Signed-off-by: Petri Savolainen &lt;petri.savolainen@nokia.com&gt;
+    Reviewed-by: Matias Elo &lt;matias.elo@nokia.com&gt;
+
+commit a6241a89c18dd7a4a14214a100369f5ef46f25ef
+Author: Petri Savolainen &lt;petri.savolainen@nokia.com&gt;
+Date:   2019-11-22 11:07:20 +0200
+
+    example: timer_accur: add timer burst option
+    
+    Added command line option (--burst) to set multiple timers
+    for each timeout period. Total number of timers is number of
+    timeout periods (--num) times the burst size.
+    
+    Signed-off-by: Petri Savolainen &lt;petri.savolainen@nokia.com&gt;
+    Reviewed-by: Matias Elo &lt;matias.elo@nokia.com&gt;
+
+commit 11bd13b261d291fd5b169e4a02c21d217fbf70ac
+Author: Petri Savolainen &lt;petri.savolainen@nokia.com&gt;
+Date:   2019-11-21 13:04:33 +0200
+
+    example: timer_accur: statistics print function
+    
+    Move statistics print into a function, so that it can be
+    reused by a new test case.
+    
+    Signed-off-by: Petri Savolainen &lt;petri.savolainen@nokia.com&gt;
+    Reviewed-by: Matias Elo &lt;matias.elo@nokia.com&gt;
+
+commit 5ee1d8235638278fca00589fd577860ce88450e6
+Author: Matias Elo &lt;matias.elo@nokia.com&gt;
+Date:   2019-11-22 10:28:47 +0200
+
+    linux-gen: pktio: change unsigned variables to unsigned int
+    
+    Checkpatch complains about bare use of unsigned.
+    
+    Signed-off-by: Matias Elo &lt;matias.elo@nokia.com&gt;
+    Reviewed-by: Petri Savolainen &lt;petri.savolainen@nokia.com&gt;
+
+commit cce800d191f57e4236deaaee739ba647459ed5d1
+Author: Matias Elo &lt;matias.elo@nokia.com&gt;
+Date:   2019-11-22 10:18:40 +0200
+
+    linux-gen: pktio: always check pktio state before recv/send
+    
+    Previously some pktio types could recv/send packets even though the pktio
+    was not in started state.
+    
+    Signed-off-by: Matias Elo &lt;matias.elo@nokia.com&gt;
+    Reviewed-by: Petri Savolainen &lt;petri.savolainen@nokia.com&gt;
+    Reported-by: Carl Wallen &lt;carl.wallen@nokia.com&gt;
+
+commit ce93696c8c016fadb4d1b6cd6a7e203f135b1194
+Author: Petri Savolainen &lt;petri.savolainen@nokia.com&gt;
+Date:   2019-11-26 16:01:58 +0200
+
+    travis: add packet and packet IO align test
+    
+    Test new packet/buffer/pktin alignment configuration file
+    options. Uses pktio_run.sh to run packets through various pktio
+    types.
+    
+    Signed-off-by: Petri Savolainen &lt;petri.savolainen@nokia.com&gt;
+    Reviewed-by: Matias Elo &lt;matias.elo@nokia.com&gt;
+
+commit 83eb1d9d4cabb56a6afd3b45b8db178d28cb7ea8
+Author: Petri Savolainen &lt;petri.savolainen@nokia.com&gt;
+Date:   2019-11-20 12:22:27 +0200
+
+    linux-gen: netmap: implement frame offset config
+    
+    Signed-off-by: Petri Savolainen &lt;petri.savolainen@nokia.com&gt;
+    Reviewed-by: Matias Elo &lt;matias.elo@nokia.com&gt;
+
+commit 25e3e77fc41de7d90a9195941fb9ddc6e15fe6dd
+Author: Petri Savolainen &lt;petri.savolainen@nokia.com&gt;
+Date:   2019-11-20 09:55:10 +0200
+
+    linux-gen: pcap: implement frame offset config
+    
+    Signed-off-by: Petri Savolainen &lt;petri.savolainen@nokia.com&gt;
+    Reviewed-by: Matias Elo &lt;matias.elo@nokia.com&gt;
+
+commit 576f69f97fa5ba1ef93bf3fbc14076760991bdb6
+Author: Petri Savolainen &lt;petri.savolainen@nokia.com&gt;
+Date:   2019-11-19 16:57:46 +0200
+
+    linux-gen: tap: implement frame offset config
+    
+    Signed-off-by: Petri Savolainen &lt;petri.savolainen@nokia.com&gt;
+    Reviewed-by: Matias Elo &lt;matias.elo@nokia.com&gt;
+
+commit c978c1ed62901815ab4abd484a820665157f85d6
+Author: Petri Savolainen &lt;petri.savolainen@nokia.com&gt;
+Date:   2019-11-19 16:49:36 +0200
+
+    linux-gen: socket: implement frame offset config
+    
+    Signed-off-by: Petri Savolainen &lt;petri.savolainen@nokia.com&gt;
+    Reviewed-by: Matias Elo &lt;matias.elo@nokia.com&gt;
+
+commit d074c91300194e7fa527f8f5186328e8d0613c1a
+Author: Petri Savolainen &lt;petri.savolainen@nokia.com&gt;
+Date:   2019-11-19 14:43:07 +0200
+
+    linux-gen: socket_mmap: implement frame offset config
+    
+    Signed-off-by: Petri Savolainen &lt;petri.savolainen@nokia.com&gt;
+    Reviewed-by: Matias Elo &lt;matias.elo@nokia.com&gt;
+
+commit 6586675011635bb26d701d9c940d76b0c1d53709
+Author: Petri Savolainen &lt;petri.savolainen@nokia.com&gt;
+Date:   2019-11-19 13:50:34 +0200
+
+    linux-gen: dpdk: implement frame offset config
+    
+    Implement frame start offset configuration option for
+    (normal) DPDK pktio. Zero-copy version does not support
+    the config.
+    
+    Signed-off-by: Petri Savolainen &lt;petri.savolainen@nokia.com&gt;
+    Reviewed-by: Matias Elo &lt;matias.elo@nokia.com&gt;
+
+commit 8e1a2b2efd96405f9304984703fc6368a39dba46
+Author: Petri Savolainen &lt;petri.savolainen@nokia.com&gt;
+Date:   2019-11-19 10:22:03 +0200
+
+    linux-gen: pktio: add pktin frame offset config option
+    
+    Added config file option to control frame start offset in
+    packet input.
+    
+    Signed-off-by: Petri Savolainen &lt;petri.savolainen@nokia.com&gt;
+    Reviewed-by: Matias Elo &lt;matias.elo@nokia.com&gt;
+
+commit e5f8a95eeea5a8f4261f8e5bcff95a4cd5cc9b79
+Author: Petri Savolainen &lt;petri.savolainen@nokia.com&gt;
+Date:   2019-11-15 16:51:47 +0200
+
+    linux-gen: pktio: rename global variable
+    
+    Renamed pktio global variable for better code readability.
+    Also save SHM handle into global data and use it, instead of
+    doing lookup by name.
+    
+    Signed-off-by: Petri Savolainen &lt;petri.savolainen@nokia.com&gt;
+    Reviewed-by: Matias Elo &lt;matias.elo@nokia.com&gt;
+
+commit 4ec7054a33c24c745cee20448055a003c7d1e4bc
+Author: Petri Savolainen &lt;petri.savolainen@nokia.com&gt;
+Date:   2019-11-19 10:56:57 +0200
+
+    linux-gen: pool: check global pointer on terminate
+    
+    Global pointer is NULL, if init fails.
+    
+    Signed-off-by: Petri Savolainen &lt;petri.savolainen@nokia.com&gt;
+    Reviewed-by: Matias Elo &lt;matias.elo@nokia.com&gt;
+
+commit 5caadb73c59095fe6520b26accea26148cc83100
+Author: Petri Savolainen &lt;petri.savolainen@nokia.com&gt;
+Date:   2019-11-15 15:58:05 +0200
+
+    linux-gen: pool: use align config options
+    
+    Setup alignment according to config file options.
+    
+    Signed-off-by: Petri Savolainen &lt;petri.savolainen@nokia.com&gt;
+    Reviewed-by: Matias Elo &lt;matias.elo@nokia.com&gt;
+
+commit 10a0418039d3d8770e80766d33bd3224d1bd88a3
+Author: Petri Savolainen &lt;petri.savolainen@nokia.com&gt;
+Date:   2019-11-15 15:39:32 +0200
+
+    linux-gen: pool: add data align config file options
+    
+    Added packet and buffer data alignment options into
+    the config file. For packets, this is the segment base
+    address alignment. For buffers, this is minimum data
+    alignment, application alignment requirements are rounded
+    up to this value.
+    
+    Signed-off-by: Petri Savolainen &lt;petri.savolainen@nokia.com&gt;
+    Reviewed-by: Matias Elo &lt;matias.elo@nokia.com&gt;
+
+commit ab5574db4e04e097170dff2d30a77281ebc85278
+Author: Petri Savolainen &lt;petri.savolainen@nokia.com&gt;
+Date:   2019-11-15 14:40:42 +0200
+
+    linux-gen: pool: rename pool global variable
+    
+    Renamed global variable for better code readability. Use _odp
+    prefix as the name is visible to application when APIs
+    are inlined.
+    
+    Signed-off-by: Petri Savolainen &lt;petri.savolainen@nokia.com&gt;
+    Reviewed-by: Matias Elo &lt;matias.elo@nokia.com&gt;
+
+commit 807aa18bcd266a7e7f66e2293db7ee2fe4923a2d
+Author: Petri Savolainen &lt;petri.savolainen@nokia.com&gt;
+Date:   2019-11-15 10:39:46 +0200
+
+    validation: packet: add max pools test
+    
+    Test that maximum number of packet pools can be created.
+    Suite init has created already one, so this test creates
+    "max_pools - 1" pools more.
+    
+    Signed-off-by: Petri Savolainen &lt;petri.savolainen@nokia.com&gt;
+    Reviewed-by: Matias Elo &lt;matias.elo@nokia.com&gt;
+
+commit 878ca435ac623687b4506e0ec3c6391566a31e3f
+Author: Petri Savolainen &lt;petri.savolainen@nokia.com&gt;
+Date:   2019-11-14 15:46:55 +0200
+
+    validation: packet: use common pool capability
+    
+    Read pool capability in suite init and use it on all tests.
+    
+    Signed-off-by: Petri Savolainen &lt;petri.savolainen@nokia.com&gt;
+    Reviewed-by: Matias Elo &lt;matias.elo@nokia.com&gt;
+
+commit 4063f3df1a50ef2d41270eef7a1426f0fb451b8b
+Author: Petri Savolainen &lt;petri.savolainen@nokia.com&gt;
+Date:   2019-11-14 15:26:18 +0200
+
+    validation: packet: remove reset test packet from suite init
+    
+    This packet is only used in packet reset test case. Moved packet
+    alloc and free inside the test case.
+    
+    Signed-off-by: Petri Savolainen &lt;petri.savolainen@nokia.com&gt;
+    Reviewed-by: Matias Elo &lt;matias.elo@nokia.com&gt;
+
+commit ad57370a0cb158aa87acb85e5004a42d73a82f06
+Author: Petri Savolainen &lt;petri.savolainen@nokia.com&gt;
+Date:   2019-11-14 15:12:59 +0200
+
+    validation: packet: rename default pool
+    
+    Rename the default (global) packet pool. This improves code
+    readability. Also, couple of buggy pool handle checks were
+    corrected (checked global pool handle vs newly created local
+    one).
+    
+    Signed-off-by: Petri Savolainen &lt;petri.savolainen@nokia.com&gt;
+    Reviewed-by: Matias Elo &lt;matias.elo@nokia.com&gt;
+
+commit 44431af475b89d16b81dfcb92db27b03b7475b74
+Author: Petri Savolainen &lt;petri.savolainen@nokia.com&gt;
+Date:   2019-11-14 15:03:48 +0200
+
+    validation: packet: remove pools from suite init
+    
+    Moved two pool creates from suite init into the test case
+    that uses those.
+    
+    Signed-off-by: Petri Savolainen &lt;petri.savolainen@nokia.com&gt;
+    Reviewed-by: Matias Elo &lt;matias.elo@nokia.com&gt;
+
+commit f55749bb0598ba9447a9ed312782821c057ef3a4
+Author: Petri Savolainen &lt;petri.savolainen@nokia.com&gt;
+Date:   2019-11-14 13:59:35 +0200
+
+    validation: buffer: rewrite buffer tests
+    
+    Improved buffer test coverage by checking more APIs, and
+    creating max num pools and more events per pool.
+    
+    Signed-off-by: Petri Savolainen &lt;petri.savolainen@nokia.com&gt;
+    Reviewed-by: Matias Elo &lt;matias.elo@nokia.com&gt;
+
+...</pre></div>
+
+</body>
+</html>

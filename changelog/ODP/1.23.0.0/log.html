@@ -1,0 +1,668 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+    <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+    <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="keywords" content="ODP, 1.23.0.0, changes, changelog" />
+    <meta name="description" content="Log of changes in the package" />
+    <link rel="stylesheet" type="text/css" href="../../../css/common.css" />
+    <link rel="stylesheet" type="text/css" href="../../../css/changelog.css" />
+    
+    
+    <title>
+        ODP 1.23.0.0: changelog
+    </title>
+    
+    </head>
+
+<body>
+<table cellpadding='0' cellspacing='0'><tr><td align='center'><h1 class='tool'><a title='ABI tracker for ODP' href='../../../timeline/ODP/index.html' class='tool'>ABI<br/>Tracker</a></h1></td><td width='30px;'></td><td><h1>(ODP)</h1></td></tr></table><hr/>
+<br/>
+<br/>
+<h1>Changelog for <span class='version'>1.23.0.0</span> version</h1><br/><br/>
+<div class='changelog'>
+<pre class='wrap'>== OpenDataPlane (1.23.0.0)
+=== Summary of Changes
+The ODP API changes in this release are related to the classifier module.
+
+The implementation changes include bug fixes (classifier, socket pktio),
+configurability improvements (inline timer), new packet segmentation
+implementation, and performance improvements (pool).
+
+=== API
+==== Classifier
+The PMR term documentation was not explicit about endianness of value and mask
+fields. Most terms assumed CPU endian, but terms with larger data sizes assumed
+big endian (MAC, IPv6 address and custom).
+
+Term specification was harmonized so that all terms expect value/mask data to be
+in big-endian format, have fixed size, and allow free memory alignment. Packet
+length term is an exception to this as it does not represent a field in a
+packet.
+
+Added new `ODP_PMR_CUSTOM_L3` term to match custom layer 3 protocol fields. PMR
+offset refers to the start of layer 3 in the packet. Other PMR rules (e.g. L2
+classification rules) may precede custom L3 rules.
+
+=== Helper
+Duplicate `ODPH_UNUSED` macro has been removed. `ODP_UNUSED` should be used
+instead.
+
+=== Validation Tests
+==== Common
+Improved test result output when some tests are inactive (skipped due to missing
+capability). Now inactive tests are listed by default in the test suite results.
+
+==== Classifier
+Cleaned up validation test code. Classifier implementation missed reporting some
+capabilities, tests didn't check those capabilities and they were tested. Source
+IPv4 term test was missing.
+
+Added serial PMR test, which tests series of PMR and CoS:
+
+* From default CoS to dest IPv4 CoS
+* From dest IPv4 CoS to dest UDP CoS
+
+Added parallel PMR test, which test serial and parallel PMR and CoS:
+
+* From default CoS to dest IPv4 CoS
+* From dest IPv4 CoS to a parallel UDP CoS per destination port number
+
+==== Scheduler
+Added new validation tests to verify that packet order is maintained when events
+are enqueued and dequeued to/from a plain queue while maintaining atomic/ordered
+scheduling context.
+
+==== Timer
+Added private timer pool test, which creates a timer pool with the `priv` flag
+set. The same thread calls schedule / queue_deq that created the pool.
+
+=== Example Applications
+==== timer_perf
+Added new test application to measure schedule call CPU cycle consumption with
+various timer pool parameter combinations. This measurement is mostly
+interesting with software-based timer implementations, where timers may be
+polled from the schedule call.
+
+==== New odp_ping application
+This application replies to IPv4 ping requests. It can be used to test
+connectivity with standard ping utility. ARP table needs to be setup manually on
+the sender side as the application does not reply to ARP requests.
+
+==== odp_classifier
+Added source CoS name into the parameter list of `-p` option. This enables
+linking classification rules together. When a source CoS is not defined, the
+default CoS is used as the source CoS.
+
+Option `-p` parameter list format is now:
+
+    &lt;term&gt;:&lt;xxx&gt;:&lt;yyy&gt;:&lt;src_cos&gt;:&lt;dst_cos&gt;
+
+Where `&lt;src_cos&gt;` is optional and number of "xxx", "yyy", etc. parameters is
+term depend.
+
+Added `-v` option which prints received packet with CoS queue
+name. This can be used for debugging classification rules.
+
+Added support for `ODP_PMR_VLAN_ID_0`, `ODP_PMR_ETHTYPE_0`, `ODP_PMR_CUSTOM_L3`,
+`ODP_PMR_ETHTYPE_X`, `ODP_PMR_VLAN_ID_X`, `ODP_PMR_UDP_DPORT`,
+`ODP_PMR_UDP_SPORT`, `ODP_PMR_TCP_DPORT`, and `ODP_PMR_TCP_SPORT` rules.
+
+==== timer_accuracy
+Fix bug in timer start offset calculation. Test results were offset by current
+local time value.
+
+Added delay and extra schedule calls to ensure that (software) timer
+implementation has passed its initial state before setting up timers.
+
+Added `-f` option to control offset to the first timer. This can be used e.g. to
+avoid best/worst case synchronization of timers to timer tick boundaries /
+resolution.
+
+==== packet_dump
+Added ICMP support. Print ICMP offset and ICMPv4 type/code. This helps to verify
+that ping requests are received.
+
+==== bench_packet
+Added missing tests for the following packet functions:
+
+* `odp_packet_data_seg_len()`
+* `odp_packet_free_sp()`
+* `odp_packet_from_event_multi()`
+* `odp_packet_to_event_multi()`
+* `odp_packet_subtype()`
+* `odp_packet_parse()`
+* `odp_packet_parse_multi()`
+
+=== Implementation
+==== Classifier
+Cleaned up implementation. Fixed endianness.
+
+==== Inline Timer
+Cleaned up code. Fixed accuracy issue with high resolution (&lt;100us) timer pools.
+Added configuration option `inline_poll_interval_nsec` to select default poll
+interval in nsec.
+
+Added configure file option for inline timer (`inline_thread_type`) to select if
+control threads poll shared timer pools or not. Control threads still poll their
+private pools. With this user can configure control and worker threads to use
+separate timer pools.
+
+==== Packet I/O
+Enable explicit pktio type definition. The pktio type is selected by adding
+pktio_type prefix in front of device name separated by a colon
+(&lt;pktio_type&gt;:&lt;if_name&gt;).
+
+The socket mmsg pktio implementation has been refactored and performance has
+been improved.
+
+The IPC pktio implementation has been modified to use standard ODP internal
+`ring_ptr_t` rings to implement IPC rings. This enables removing the duplicate
+`_ring_t` implementation.
+
+==== Pool
+Packet segmentation has been reimplemented using a linked list. The new
+implementation is simpler and has the added benefit of greatly reducing
+packet and buffer header sizes.
+
+=== Bug Fixes
+==== Unnumbered Bugs / Issues
+* Fixed socket mmap pktio throughput collapse under heavy traffic
+
+* Fixed missing config header in install directory
+
+* Include only ODP defines in autogenerated header files
+
+* Fixed GCC 9 `address-of-packed-member` warnings
+
+* Disable building static test applications without static ODP lib
+
+* Fixed a segfault in `odp_pktin_recv_mq_tmo()` implementation
+
+* Fixed classifier vlan match bugs and tests
+
+* Fixed classifier matching of parallel PMRs
+
+
+== OpenDataPlane (1.22.0.0)
+=== Summary of Changes
+ODP v1.22.0.0 adds several smaller API changes mainly related to API
+clarification.
+
+=== API Changes
+==== Added `odp_queue_order_t` parameter to `odp_queue_param_t`
+Added a parameter to control if a destination queue does not require event
+re-ordering. By default, event order is maintained for all destination queues as
+before. Application may use `ODP_QUEUE_ORDER_IGNORE` for those queues that are
+used under ordered queue context, but do not require re-ordering and/or do need
+to avoid extra re-ordering delays.
+
+==== Added `ODP_SHM_HP` flag for `odp_shm_reserve()`
+When set, this flag guarantees that the memory reserved by `odp_shm_reserve()`
+is allocated from huge pages. If enough huge page memory is not available the
+call will fail.
+
+==== Improved initialization and termination specification
+Improve specification of initialization and termination steps. Explicitly list
+those functions that may be used before global init (those that are needed for
+setting up parameters). No changes to functionality.
+
+==== Improved queue context specification
+Highlight that queue context default value is NULL. This was defined already in
+`odp_queue_param_t` specification.
+
+==== New Crypto Algorithm Support
+Support for new crypto algorithms is added by defining symbols for:
+
+* `ODP_CIPHER_ALG_3DES_ECB`
+* `ODP_CIPHER_ALG_AES_ECB`
+* `ODP_CIPHER_ALG_AES_CFB128`
+* `ODP_CIPHER_ALG_AES_XTS`
+* `ODP_CIPHER_ALG_AES_EEA2`
+
+Support for new crypto authentication algorithms is added by defining symbols
+for:
+
+* `ODP_AUTH_ALG_SHA224_HMAC`
+* `ODP_AUTH_ALG_AES_EIA2`
+
+Added enumeration for digest (unkeyed) algorithms. They are added as auth
+algorithms with empty key required.
+
+* `ODP_AUTH_ALG_MD5`
+* `ODP_AUTH_ALG_SHA1`
+* `ODP_AUTH_ALG_SHA224`
+* `ODP_AUTH_ALG_SHA256`
+* `ODP_AUTH_ALG_SHA384`
+* `ODP_AUTH_ALG_SHA512`
+
+==== Crypto specification improvements / fixes
+Correct documentation for `ODP_AUTH_ALG_SNOW3G_UIA2` to reference 128-EIA1
+instead of 128-EEA1.
+
+Clarify IV data format and point to proper documents for 3GPP algorithms.
+
+==== Timer specification clarification
+Timer API intention has always been to allow any event type to be used as
+timeout events. Application should use `ODP_EVENT_TIMEOUT` type events
+(`odp_timeout_t`) by default, but also other event types may be used. Also,
+clarified timer set/reset functionality of `odp_timer_set_abs()` and
+`odp_timer_set_rel()` functions.
+
+API functionality not changed, just wording updated.
+
+==== Added timer resolution capability
+Typically, timer implementation needs to trade-off between highest resolution
+and longest timeout. Add new capability information
+(`odp_timer_res_capability_t`) and function to check limits between resolution
+and maximum timeout length.
+
+`odp_timer_res_capability()`::
+This function fills in capability limits for timer pool resolution and min/max
+timeout values, based on either resolution or maximum timeout.
+
+==== Added defines for minute and hour
+Defines for a minute and an hour are useful e.g. when setting timers for a bit
+longer (background, session lifetime, etc.) timeouts.
+
+* `ODP_TIME_MIN_IN_NS`
+* `ODP_TIME_HOUR_IN_NS`
+
+=== Helper Changes
+==== Added helper library version
+Added helper library version defines, so that application can track helper
+version independent of ODP API version:
+
+* `ODPH_VERSION_GENERATION`
+* `ODPH_VERSION_MAJOR`
+* `ODPH_VERSION_MINOR`
+
+Also, added a function for generating easy printout of the versions number.
+
+`odph_version_str()`::
+The version string defines the helper library version the following format:
+ `&lt;generation&gt;.&lt;major&gt;.&lt;minor&gt;`
+
+==== Added new thread create and join functions
+Defined new versions of thread create and join calls. The new calls explicitly
+support thread create and join in multiple steps. Also, per thread
+(`odph_thread_param_t`) and common parameters (`odph_thread_common_param_t`)
+have been improved.
+
+`odph_thread_create()`::
+Create and pin threads (as Linux pthreads or processes)
+
+`odph_thread_join()`::
+Wait previously launched threads to exit
+
+Old functions `odph_odpthreads_create()` and `odph_odpthreads_join()`
+have been deprecated.
+
+==== Added helper debug defines
+Added debug defines/macros into helper API and configure options to
+enable/disable helper debugging. These defines may be used both in helper and
+application code:
+
+* `ODPH_DEBUG` is 1 when helper debugging is enabled (`--enable-helper-debug`)
+* `ODPH_DEBUG_PRINT` is 1 when helper debug printing is enabled (`--enable-helper-debug-print`)
+* `ODPH_ASSERT()` generates assertion code when helper debugging is enabled
+
+=== Validation Test Improvements
+==== Timer Test Improvements
+Enables passing tests on high core count devices.
+
+Test min/max timeouts with the highest resolution and longest timeout
+parameters.
+
+==== Scheduler Test Fixes
+The group test would fail if `odp_schedule(ODP_SCHED_NO_WAIT)` wouldn't return
+any events on the first call.
+
+`scheduler_test_pause_resume()` would get stuck if all events were not
+successfully enqueued.
+
+Fixed a number of synchronization problems revealed by a scheduler
+implementation doing pre-scheduling. Makes sure scheduling context is always
+properly released.
+
+==== Classification Test Fixes
+Some of the test array elements may have not been set if the number of supported
+scheduling priorities was low.
+
+==== Pktio Test Improvements
+Added more debug information on magic number misses.
+
+==== Initialization Test Improvements / Fixes
+Added missing local init/term calls to all test cases.
+
+Added test case to set num_worker and num_control parameters.
+
+Added test case to set not used features flags in init parameters.
+
+==== Buffer Test Fixes
+Test suite missed to output the return value of `odp_cunit_run()`.
+
+==== Queue Test Improvements
+Check that queue context pointer value is NULL by default.
+
+==== IPsec Test Fixes
+Check pktio level inline IPsec support before running tests.
+
+==== Crypto Test Improvements
+Added support for AES-194-GMAC and AES-256-GMAC algorithms.
+
+Added more AES-CBC and AES-CTR test vectors.
+
+=== Example Changes
+==== Added new pipeline example application
+The application receives packets from one interface and passes them through 0-N
+worker stages before outputting them from a second network interface. The RX,
+worker, and TX stages are connected using plain queues and each stage is run on
+a separate CPU thread. Optionally, the worker stages calculate CRC-32C over
+packet data.
+
+==== Time example fixes
+Fix single worker deadlock and run the application as part of `make check`.
+
+==== IPsec example fixes
+Fixed a number of issues in IPsec example applications and run them during
+`make check`.
+
+==== New command line options
+===== l2fwd
+* added `-b` option to control maximum packet receive burst size
+
+===== pool_perf
+* added `-n` option to allocate multiple event bursts before freeing those
+* added `-t` option to select between buffer or packet pool types
+* added `-s` option to select data size
+
+===== sched_perf
+
+* added `-w` option to simulate application work
+* added `-g` and `-j` options to test scheduling with a number of schedule groups
+
+=== Implementation Improvements
+==== Pool Implementation Improvements
+Refactor local buffer caching into separate functions and optimize
+implementation by caching buffer header pointers instead of indices.
+
+New configuration options have been added for local cache
+(`pool:local_cache_size`) and burst sizes (`pool:burst_size`).
+
+Pool implementation has been modified to store buffer headers instead of
+indices to reduce type conversion overhead.
+
+==== Timer Implementation Improvements
+Added warm up period into POSIX timer pool startup to avoid the first timeout
+to slip. Otherwise, timer pthread receives the first signal after about 15ms and
+first timeout of the pool slips.
+
+==== DPDK Packet I/O Improvements
+The zero-copy DPDK pktio implementation has been cleaned up resulting a small
+performance improvement. Linking to DPDK library has also been simplified.
+
+=== Miscellaneous
+* ODP project has been moved from Linaro to OpenFastPath Foundation. Project
+documentation and domain addresses have been updated to reflect this change.
+
+* Added `--without-pcap` configuration option to explicitly build ODP without
+PCAP pktio regardless of if the library is available on the build host.
+
+* Added `--enable-lto` configuration option to build ODP with link time
+optimization (`-flto` flag).
+
+* Travis default distribution is updated to Ubuntu Xenial.
+
+* Added `-O3`, `-O0`, and LTO build tests to Travis
+
+* Supported Netmap version has been bumped to v13.0
+
+=== Bug Fixes
+==== Numbered Bugs / Issues
+* Fixed: https://github.com/OpenDataPlane/odp/issues/827[Issue 827]
+API doc links are not working
+
+* Fixed: https://github.com/OpenDataPlane/odp/issues/817[Issue 817]
+ODP fails to compile with latest OpenSSL
+
+* Fixed: https://github.com/OpenDataPlane/odp/issues/784[Issue 784]
+Bus error
+
+==== Unnumbered Bugs / Issues
+* Fixed build problems on Debian 8
+
+* Fixed AES-GMAC with OpenSSL 1.1.1b and later
+
+* Fixed out-of-tree build
+
+* Fixed pcapng pipe read permissions and made possible to capture traffic from
+multiple interfaces
+
+== OpenDataPlane (1.21.0.0)
+=== Summary of Changes
+ODP v1.21.0.0 adds two new API families as well as several small improvements.
+
+==== APIs
+===== Compression Support
+A new family of APIs is added that provides for session-oriented support for
+packet data compression and decompression. Compression sessions define the
+parameters used to control compression operations and their associated
+integrity hashes.  Once created, sessions are input parameters to the new
+`odp_comp_op()` and `odp_comp_op_enq()` APIs that provide access to
+synchronous and asynchronous compression services on packets.
+
+Associated with the completion of asynchronous compression operations, a new
+packet subtype, `ODP_EVENT_PACKET_COMP` is defined. This subtype indicates
+that the packet includes additional metadata (retrievable via
+`odp_comp_result()`) that provides the result of the requested operation.
+
+A number of different compression and associated hash algorithms are defined,
+which are communicated with three new capability APIs:
+
+`odp_comp_capability()`::
+Provides information about general compression related capabilities
+offered by this implementation
+
+`odp_comp_alg_capability()`::
+Provides details about the capabilities of individual compression algorithms
+supported.
+
+`odp_comp_hash_alg_capability()`::
+Provides details about the capabilities of individual hash algorithms
+supported for use with compression.
+
+===== Flow Aware Scheduler Support
+A new capability for flow aware scheduling is added. As part of this, the
+scheduler now supports capabilities and configurability. As a result, the
+initialization sequence for applications that make use of the ODP scheduler
+has changed slightly. The new API call sequence is:
+[source,c]
+-----
+odp_schedule_capability()
+odp_schedule_config_init()
+odp_schedule_config()
+odp_schedule()
+-----
+It is a programming error to call `odp_schedule()` (or its variants) without
+having first initialized the scheduler with an `odp_schedule_config()` call.
+This call may only be issued once per ODP instance as scheduler configuration
+is global.
+
+By default the scheduler operates as before. When configured to operate in
+flow aware mode, the scheduler will now respect event flow ids (managed by the
+new `odp_event_flow_id()` and `odp_event_flow_id_set()` APIs) when making
+scheduling decisions. This means that flow identification is a combination of
+event flow id and queue id. For example, when operating in flow aware mode the
+scheduler may dispatch events from an atomic queue to multiple threads
+concurrently, as long as those events have different flow ids. For
+applications that process large numbers of lightweight flows that have limited
+context needs, this can lead to throughput improvements as well as reduced
+implementation memory footprint.
+
+==== DPDK v18.11 Support
+The latest LTS release of DPDK (v18.11) is now supported by ODP. Support for
+the previous LTS release (v17.11) is retained. Prior versions of DPDK are
+no longer supported.
+
+==== Queue Capabilities Moved to Scheduler
+As part of the introduction of flow-aware scheduling, capabilities associated
+with `SCHED` queues have been moved from the `odp_queue_capabilities_t` struct
+returned by `odp_queue_capabilities()` to the new `odp_sched_capabilities_t`
+struct returned by `odp_sched_capabilities()`.
+
+Capabilities moved include `max_ordered_locks`, `max_sched_groups`, and
+`sched_prios`. The `max_sched_groups` capability is renamed `max_groups`. In
+addition, `max_queues`, `max_queue_size`, and the support capabilities for
+lock free and wait free non blocking queues is now part of the scheduler
+capabilities.
+
+In support of flow aware scheduling mode, the `max_flows` scheduler capability
+is renamed `max_flow_id`. A value of 0 indicates that flow aware mode
+scheduling is not available in this ODP implementation.
+
+=== Test/Validation Improvements
+==== Travis readability improvement
+The "BUILD_ONLY` environment variable has been renamed `CHECK` for improved
+output readability.
+
+==== Flow aware scheduler testing
+As part of flow aware mode, scheduler validation tests will now test this mode
+if `odp_schedule_capability()` indicates that flow-aware mode is supported.
+
+=== Bug Fixes
+==== Unnumbered Bugs/Issues
+
+* Latest version of netmap `nm_ring_empty()` implementation has changed.
+PktIO netmap support updated to support this as well as previous releases.
+
+* Improved compatibility of PktIO socket support with latest versions
+of the clang compiler.
+
+* Add match pattern for missing DPDK PMD drivers for improved compatibility.
+
+== OpenDataPlane (1.20.0.0)
+=== Summary of Changes
+ODP v1.20.0.0 is a refresh of ODP, incorporating significant configurability
+and performance improvements as well as new APIs and API restructures.
+
+==== APIs
+===== Symbol `ODP_SHM_NULL` Removed.
+An invalid `odp_shm_t` has the value `ODP_SHM_INVALID`, consistent with other
+ODP types. The legacy synonym `ODP_SHM_NULL` is now removed for consistency.
+
+===== New 3GPP Crypto Algorithm Support
+New support for 3GPP crypto algorithms is added by defining symbols for
+
+* `ODP_CIPHER_ALG_KASUMI_F8`
+* `ODP_CIPHER_ALG_SNOW3G_UEA2`
+* `ODP_CIPHER_ALG_ZUC_EEA3`
+
+In addition new authentication algorithm symbols are defined for
+
+* `ODP_AUTH_ALG_KASUMI_F9`
+* `ODP_AUTH_ALG_SNOW3G_UIA2`
+* `ODP_AUTH_ALG_ZUC_EIA3`
+
+These values are returned as ODP capabilities as well as being accepted in
+crypto session creation for implementations that indicate support for them.
+
+===== Crypto Capability for Bitwise Operation
+The new `bit_mode` capability Boolean is added to the
+`odp_crypto_cipher_capability_t` struct to indicate that an implementation
+supports operating in bit mode. When operating in bit
+mode, field offsets and lengths are expressed in terms of bits rather than
+bytes. However, such lengths must always be specified in multiples of 8.
+
+===== Improved Crypto Spec Documentation
+The ODP crypto API specification is tightened to specify default values for
+cipher and authentication algorithms. Also documented when key and IV
+parameters need to be set.
+
+===== IPsec Extensions
+IPsec requires "salt" (extra keying material) when the GMAC authentication
+algorithm is used. To accommodate this the `auth_key_extra` field is added to
+the `odp_ipsec_crypto_param_t` struct and documentation is added clarifying
+when this field is needed and how it should be used.
+
+===== Classifier Type Rename
+The `odp_pmr_t` type name for an invalid value is renamed from `ODP_PMR_INVAL`
+to `ODP_PMR_INVALID` for consistency with the rest of ODP type names. The old
+symbol is still available when ODP is configured with
+`--enable-deprecated`.
+
+===== New API for Packet Event Subtypes
+The `odp_packet_subtype()` API is added that returns the subtype of a packet
+event directly.
+
+===== Streamlined Packet Parsing Results
+The `odp_packet_parse_result()` API is added that returns the result of
+packet parsing as a single `odp_packet_parse_result_t` struct. This can
+offer efficiency improvements for applications that need all parse results
+rather than making individual parse result calls.
+
+===== PktIO Extensions to Support per-Queue Configuration
+PktIO interfaces support multiple input queues to enable increased parallelism
+in I/O processing. Previously, all of these input queues were required to
+belong to the same scheduler group. The `odp_pktin_queue_param_t` struct is
+now extended with an optional `odp_pktin_queue_param_ovr_t` struct that
+permits individual pktin queues to be assigned to separate scheduler groups.
+This may permit improved performance for advanced application use cases.
+
+===== Timer Pool Capabilities
+The `odp_timer_capability_t` struct is extended to return three additional
+pieces of information:
+
+`max_pools_combined`::
+The total number of timer pools that can be created combining different
+clock sources
+
+`max_pools`::
+The maximum number of timer pools for a given clock source.
+
+`max_timers`::
+The maximum number of timers in a single pool. A zero value means number is
+limited only by available memory.
+
+===== Add Scheduler mix/max/default Priority Functions
+Three new APIs: `odp_schedule_max_prio()`, `odp_schedule_min_prio()`, and
+`odp_schedule_default_prio()` are added that return the min, max, and default
+values specified for the `prio` field in the `odp_schedule_param_t` struct.
+
+With the introduction of these scheduling priority functions the previously
+defined macros (`ODP_SCHED_PRIO_HIGHEST`, `ODP_SCHED_PRIO_NORMAL`, and
+`ODP_SCHED_PRIO_LOWEST`) are now deprecated and should no longer be used.
+
+===== Specification of `odp_schedule_prio_t` as an `int`
+Previously, the `odp_schedule_prio_t` type definition was left to each
+implementation. With the addition of explicit schedule priority ranges, this
+type is now specified to be an `int` to permit efficient implementation
+(including inlining) of these functions.
+
+====== New Scheduler APIs
+The new scheduler APIs `odp_schedule_multi_wait()` and
+`odp_schedule_multi_no_wait()` are added to provide more efficiently
+implementable versions of these functions. The existing scheduler APIs remain
+unchanged. These new APIs can simply provide a fastpath for some
+applications/implementations as an alternative to specifying a parameter on
+`odp_schedule_multi()`.
+
+===== Memory Model in `odp_init_global()`
+The `odp_init_t` parameter passed to `odp_init_global()` is extended to
+add the `mem_model` field. This field is defined by the new `odp_mem_model_t`
+struct and is used to specify whether the application will be using a
+thread (`ODP_MEM_MODEL_THREAD`) or process (`ODP_MEM_MODEL_PROCESS`)
+memory model. The default is a thread model is used for compatibility with
+previous levels of ODP.
+
+==== ABI Changes
+A number of changes to the ODP ABI have also been made in this release to
+improve application binary portability.
+
+===== Strong Typing for Timer Pools
+The `odp_timer_pool_t` is now strongly typed.
+
+===== Consistent
+...</pre></div>
+
+</body>
+</html>

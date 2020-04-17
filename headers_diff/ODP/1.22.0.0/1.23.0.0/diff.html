@@ -1,0 +1,717 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+    <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+    <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="keywords" content="ODP, header, diff" />
+    <meta name="description" content="Diff for header files between 1.22.0.0 and 1.23.0.0 versions of ODP" />
+    <link rel="stylesheet" type="text/css" href="../../../../css/common.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../css/headers_diff.css" />
+    
+    
+    <title>
+        ODP: headers diff between 1.22.0.0 and 1.23.0.0 versions
+    </title>
+    
+    </head>
+
+<body>
+<table width='100%' cellpadding='0' cellspacing='0'><tr><td><table cellpadding='0' cellspacing='0'><tr><td align='center'><h1 class='tool'><a title='ABI tracker for ODP' href='../../../../timeline/ODP/index.html' class='tool'>ABI<br/>Tracker</a></h1></td><td width='30px;'></td><td><h1>(ODP)</h1></td></tr></table><hr/>
+<br/>
+<br/>
+<h1>Headers diff: <span class='version'>1.22.0.0</span> vs <span class='version'>1.23.0.0</span></h1><br/><br/> 
+  <table class='diff_tbl' border="0" cellpadding="0" cellspacing="0"> 
+  <tr bgcolor="orange"><th>&nbsp;classification.h (1.22.0.0)&nbsp;</th><th> </th><th>&nbsp;classification.h (1.23.0.0)&nbsp;</th></tr> 
+      <tr><td class="left"></td><td> </td><td class="right"></td></tr>
+      <tr bgcolor="gray" ><th><a name="part-l1" /><small>skipping to change at</small><em> line 100</em></th><th> </th><th><a name="part-r1" /><small>skipping to change at</small><em> line 100</em></th></tr>
+      <tr><td class="left">               /** Destination IP address */</td><td> </td><td class="right">               /** Destination IP address */</td></tr>
+      <tr><td class="left">               uint64_t        dip_addr:1;</td><td> </td><td class="right">               uint64_t        dip_addr:1;</td></tr>
+      <tr><td class="left">               /** Source IP address */</td><td> </td><td class="right">               /** Source IP address */</td></tr>
+      <tr><td class="left">               uint64_t        sip6_addr:1;</td><td> </td><td class="right">               uint64_t        sip6_addr:1;</td></tr>
+      <tr><td class="left">               /** Destination IP address */</td><td> </td><td class="right">               /** Destination IP address */</td></tr>
+      <tr><td class="left">               uint64_t        dip6_addr:1;</td><td> </td><td class="right">               uint64_t        dip6_addr:1;</td></tr>
+      <tr><td class="left">               /** IPsec session identifier */</td><td> </td><td class="right">               /** IPsec session identifier */</td></tr>
+      <tr><td class="left">               uint64_t        ipsec_spi:1;</td><td> </td><td class="right">               uint64_t        ipsec_spi:1;</td></tr>
+      <tr><td class="left">               /** NVGRE/VXLAN network identifier */</td><td> </td><td class="right">               /** NVGRE/VXLAN network identifier */</td></tr>
+      <tr><td class="left">               uint64_t        ld_vni:1;</td><td> </td><td class="right">               uint64_t        ld_vni:1;</td></tr>
+      <tr><td><a name="diff0001" /></td></tr>
+      <tr><td class="lblock">               /** Custom match <span class="delete">rule,</span> offset from start of</td><td> </td><td class="rblock">               /** Custom <span class="insert">frame</span> match <span class="insert">rule. PMR</span> offset <span class="insert">is counted</span> from</td></tr>
+      <tr><td class="lblock">                <span class="delete">* frame. The</span> match is <span class="delete">defined by</span> the <span class="delete">offset,</span> the</td><td> </td><td class="rblock">                <span class="insert">*  the</span> start of <span class="insert">the packet. */</span></td></tr>
+      <tr><td class="lblock">                <span class="delete">* expected value, and its size.</span></td><td> </td><td class="rblock"><span class="insert">               uint64_t        custom_frame:1;</span></td></tr>
+      <tr><td class="lblock">                */</td><td> </td><td class="rblock"><span class="insert">               /** Custom layer 3</span> match <span class="insert">rule. PMR offset</span> is <span class="insert">counted from</span></td></tr>
+      <tr><td class="lblock">               uint64_t        <span class="delete">custom_frame:1;</span></td><td> </td><td class="rblock"><span class="insert">                *</span>  the <span class="insert">start of layer 3 in</span> the <span class="insert">packet.</span> */</td></tr>
+      <tr><td class="lblock"></td><td> </td><td class="rblock">               uint64_t        <span class="insert">custom_l3:1;</span></td></tr>
+      <tr><td class="left"></td><td> </td><td class="right"></td></tr>
+      <tr><td class="left">       } bit;</td><td> </td><td class="right">       } bit;</td></tr>
+      <tr><td class="left">       /** All bits of the bit field structure */</td><td> </td><td class="right">       /** All bits of the bit field structure */</td></tr>
+      <tr><td class="left">       uint64_t all_bits;</td><td> </td><td class="right">       uint64_t all_bits;</td></tr>
+      <tr><td class="left">} odp_cls_pmr_terms_t;</td><td> </td><td class="right">} odp_cls_pmr_terms_t;</td></tr>
+      <tr><td class="left"></td><td> </td><td class="right"></td></tr>
+      <tr><td class="left">/** Random Early Detection (RED)</td><td> </td><td class="right">/** Random Early Detection (RED)</td></tr>
+      <tr><td class="left"> * Random Early Detection is enabled to initiate a drop probability for the</td><td> </td><td class="right"> * Random Early Detection is enabled to initiate a drop probability for the</td></tr>
+      <tr><td class="left"> * incoming packet when the packets in the queue/pool cross the specified</td><td> </td><td class="right"> * incoming packet when the packets in the queue/pool cross the specified</td></tr>
+      <tr><td class="left"> * threshold values. RED is enabled when 'red_enable' boolean is true and</td><td> </td><td class="right"> * threshold values. RED is enabled when 'red_enable' boolean is true and</td></tr>
+      <tr><td class="left"></td><td> </td><td class="right"></td></tr>
+      <tr bgcolor="gray" ><th><a name="part-l2" /><small>skipping to change at</small><em> line 177</em></th><th> </th><th><a name="part-r2" /><small>skipping to change at</small><em> line 178</em></th></tr>
+      <tr><td class="left"> * Classification capabilities</td><td> </td><td class="right"> * Classification capabilities</td></tr>
+      <tr><td class="left"> * This capability structure defines system level classification capability</td><td> </td><td class="right"> * This capability structure defines system level classification capability</td></tr>
+      <tr><td class="left"> */</td><td> </td><td class="right"> */</td></tr>
+      <tr><td class="left">typedef struct odp_cls_capability_t {</td><td> </td><td class="right">typedef struct odp_cls_capability_t {</td></tr>
+      <tr><td class="left">       /** PMR terms supported by the classifier</td><td> </td><td class="right">       /** PMR terms supported by the classifier</td></tr>
+      <tr><td class="left">        * A bit mask of one bit for each of odp_pmr_term_t</td><td> </td><td class="right">        * A bit mask of one bit for each of odp_pmr_term_t</td></tr>
+      <tr><td class="left">        */</td><td> </td><td class="right">        */</td></tr>
+      <tr><td class="left">       odp_cls_pmr_terms_t supported_terms;</td><td> </td><td class="right">       odp_cls_pmr_terms_t supported_terms;</td></tr>
+      <tr><td class="left"></td><td> </td><td class="right"></td></tr>
+      <tr><td class="left">       /** Maximum number of PMR terms */</td><td> </td><td class="right">       /** Maximum number of PMR terms */</td></tr>
+      <tr><td><a name="diff0002" /></td></tr>
+      <tr><td class="lblock">       unsigned max_pmr_terms;</td><td> </td><td class="rblock">       unsigned <span class="insert">int </span>max_pmr_terms;</td></tr>
+      <tr><td class="left"></td><td> </td><td class="right"></td></tr>
+      <tr><td class="left">       /** Number of PMR terms available for use now */</td><td> </td><td class="right">       /** Number of PMR terms available for use now */</td></tr>
+      <tr><td><a name="diff0003" /></td></tr>
+      <tr><td class="lblock">       unsigned available_pmr_terms;</td><td> </td><td class="rblock">       unsigned <span class="insert">int </span>available_pmr_terms;</td></tr>
+      <tr><td class="left"></td><td> </td><td class="right"></td></tr>
+      <tr><td class="left">       /** Maximum number of CoS supported */</td><td> </td><td class="right">       /** Maximum number of CoS supported */</td></tr>
+      <tr><td><a name="diff0004" /></td></tr>
+      <tr><td class="lblock">       unsigned max_cos;</td><td> </td><td class="rblock">       unsigned <span class="insert">int </span>max_cos;</td></tr>
+      <tr><td class="left"></td><td> </td><td class="right"></td></tr>
+      <tr><td class="left">       /** Maximun number of queue supported per CoS</td><td> </td><td class="right">       /** Maximun number of queue supported per CoS</td></tr>
+      <tr><td class="left">        * if the value is 1, then hashing is not supported*/</td><td> </td><td class="right">        * if the value is 1, then hashing is not supported*/</td></tr>
+      <tr><td><a name="diff0005" /></td></tr>
+      <tr><td class="lblock">       unsigned max_hash_queues;</td><td> </td><td class="rblock">       unsigned <span class="insert">int </span>max_hash_queues;</td></tr>
+      <tr><td class="left"></td><td> </td><td class="right"></td></tr>
+      <tr><td class="left">       /** Protocol header combination supported for Hashing */</td><td> </td><td class="right">       /** Protocol header combination supported for Hashing */</td></tr>
+      <tr><td class="left">       odp_pktin_hash_proto_t hash_protocols;</td><td> </td><td class="right">       odp_pktin_hash_proto_t hash_protocols;</td></tr>
+      <tr><td class="left"></td><td> </td><td class="right"></td></tr>
+      <tr><td class="left">       /** A Boolean to denote support of PMR range */</td><td> </td><td class="right">       /** A Boolean to denote support of PMR range */</td></tr>
+      <tr><td class="left">       odp_bool_t pmr_range_supported;</td><td> </td><td class="right">       odp_bool_t pmr_range_supported;</td></tr>
+      <tr><td class="left"></td><td> </td><td class="right"></td></tr>
+      <tr><td class="left">       /** Support for Random Early Detection */</td><td> </td><td class="right">       /** Support for Random Early Detection */</td></tr>
+      <tr><td class="left">       odp_support_t random_early_detection;</td><td> </td><td class="right">       odp_support_t random_early_detection;</td></tr>
+      <tr><td class="left"></td><td> </td><td class="right"></td></tr>
+      <tr><td class="left"></td><td> </td><td class="right"></td></tr>
+      <tr bgcolor="gray" ><th><a name="part-l3" /><small>skipping to change at</small><em> line 464</em></th><th> </th><th><a name="part-r3" /><small>skipping to change at</small><em> line 465</em></th></tr>
+      <tr><td class="left">                       odp_cos_t cos_table[],</td><td> </td><td class="right">                       odp_cos_t cos_table[],</td></tr>
+      <tr><td class="left">                       odp_bool_t l3_preference);</td><td> </td><td class="right">                       odp_bool_t l3_preference);</td></tr>
+      <tr><td class="left"></td><td> </td><td class="right"></td></tr>
+      <tr><td class="left">/**</td><td> </td><td class="right">/**</td></tr>
+      <tr><td class="left"> * @typedef odp_pmr_t</td><td> </td><td class="right"> * @typedef odp_pmr_t</td></tr>
+      <tr><td class="left"> * PMR - Packet Matching Rule</td><td> </td><td class="right"> * PMR - Packet Matching Rule</td></tr>
+      <tr><td class="left"> * Up to 32 bit of ternary matching of one of the available header fields</td><td> </td><td class="right"> * Up to 32 bit of ternary matching of one of the available header fields</td></tr>
+      <tr><td class="left"> */</td><td> </td><td class="right"> */</td></tr>
+      <tr><td class="left"></td><td> </td><td class="right"></td></tr>
+      <tr><td class="left">/**</td><td> </td><td class="right">/**</td></tr>
+      <tr><td><a name="diff0006" /></td></tr>
+      <tr><td class="lblock"> * Packet Matching Rule <span class="delete">field enumeration</span></td><td> </td><td class="rblock"> * Packet Matching Rule <span class="insert">terms</span></td></tr>
+      <tr><td class="lblock"> * <span class="delete">for fields that may be used to calculate</span></td><td> </td><td class="rblock"> *</td></tr>
+      <tr><td class="lblock"> * the <span class="delete">PMR, if present</span> in a <span class="delete">packet.</span></td><td> </td><td class="rblock"> * <span class="insert">This enumeration selects</span> the <span class="insert">protocol field that is matched against PMR</span></td></tr>
+      <tr><td class="lblock"></td><td> </td><td class="rblock"><span class="insert"> * value/mask or value range. Protocol field values and masks are passed in</span></td></tr>
+      <tr><td class="lblock"></td><td> </td><td class="rblock"><span class="insert"> big</span></td></tr>
+      <tr><td class="lblock"></td><td> </td><td class="rblock"><span class="insert"> * endian (network endian) format. However, ODP_PMR_LEN value and range are</span></td></tr>
+      <tr><td class="lblock"></td><td> </td><td class="rblock"><span class="insert"> * passed</span> in <span class="insert">CPU native endian (uint32_t words), as the term does not repre</span></td></tr>
+      <tr><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">sent</span></td></tr>
+      <tr><td class="lblock"></td><td> </td><td class="rblock"><span class="insert"> *</span> a <span class="insert">protocol field.</span></td></tr>
+      <tr><td class="lblock"></td><td> </td><td class="rblock"><span class="insert"> *</span></td></tr>
+      <tr><td class="lblock"></td><td> </td><td class="rblock"><span class="insert"> * PMR value/mask data size is term specific. This size must be set into va</span></td></tr>
+      <tr><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">l_sz</span></td></tr>
+      <tr><td class="lblock"></td><td> </td><td class="rblock"><span class="insert"> * field of odp_pmr_param_t. There is no alignment requirement for PMR</span></td></tr>
+      <tr><td class="lblock"></td><td> </td><td class="rblock"><span class="insert"> * value/mask data.</span></td></tr>
+      <tr><td class="left"> */</td><td> </td><td class="right"> */</td></tr>
+      <tr><td class="left">typedef enum {</td><td> </td><td class="right">typedef enum {</td></tr>
+      <tr><td><a name="diff0007" /></td></tr>
+      <tr><td class="lblock">       <span class="delete">ODP_PMR_LEN,            /**&lt;</span> Total length of received <span class="delete">packet*/</span></td><td> </td><td class="rblock">       <span class="insert">/**</span> Total length of received <span class="insert">packet. Exceptionally, value and mask a</span></td></tr>
+      <tr><td class="lblock"><span class="delete">       ODP_PMR_ETHTYPE_0,      /**&lt;</span> Initial (outer)</td><td> </td><td class="rblock"><span class="insert">re</span></td></tr>
+      <tr><td class="lblock">                               Ethertype only <span class="delete">(*val=uint16_t)*/</span></td><td> </td><td class="rblock"><span class="insert">         * uint32_t (val_sz = 4) in CPU endian. */</span></td></tr>
+      <tr><td class="lblock"><span class="delete">       ODP_PMR_ETHTYPE_X,      /**&lt;</span> Ethertype of most inner VLAN tag</td><td> </td><td class="rblock"><span class="insert">       ODP_PMR_LEN,</span></td></tr>
+      <tr><td class="lblock">                               <span class="delete">(*val=uint16_t)*/</span></td><td> </td><td class="rblock"><span class="insert"></span></td></tr>
+      <tr><td class="lblock"><span class="delete">       ODP_PMR_VLAN_ID_0,      /**&lt;</span> First VLAN ID <span class="delete">(outer) (*val=uint16_t) *</span></td><td> </td><td class="rblock"><span class="insert">       /**</span> Initial (outer) Ethertype only <span class="insert">(val_sz = 2) */</span></td></tr>
+      <tr><td class="lblock"><span class="delete">/</span></td><td> </td><td class="rblock"><span class="insert">       ODP_PMR_ETHTYPE_0,</span></td></tr>
+      <tr><td class="lblock"><span class="delete">       ODP_PMR_VLAN_ID_X,      /**&lt;</span> Last VLAN ID <span class="delete">(inner) (*val=uint16_t)</span> */</td><td> </td><td class="rblock"><span class="insert"></span></td></tr>
+      <tr><td class="lblock">       <span class="delete">ODP_PMR_DMAC,           /**&lt; destination</span> MAC address <span class="delete">(*val=uint64_t)</span></td><td> </td><td class="rblock"><span class="insert">       /**</span> Ethertype of most inner VLAN tag <span class="insert">(val_sz = 2) */</span></td></tr>
+      <tr><td class="lblock">*/</td><td> </td><td class="rblock"><span class="insert">       ODP_PMR_ETHTYPE_X,</span></td></tr>
+      <tr><td class="lblock">       <span class="delete">ODP_PMR_IPPROTO,        /**&lt; IP</span> Protocol or IPv6 Next Header</td><td> </td><td class="rblock"><span class="insert"></span></td></tr>
+      <tr><td class="lblock">                               <span class="delete">(*val=uint8_t)</span> */</td><td> </td><td class="rblock"><span class="insert">       /**</span> First <span class="insert">(outer)</span> VLAN ID <span class="insert">(val_sz = 2) */</span></td></tr>
+      <tr><td class="lblock">       <span class="delete">ODP_PMR_UDP_DPORT,      /**&lt;</span> Destination UDP <span class="delete">port, implies IPPROTO=1</span></td><td> </td><td class="rblock"><span class="insert">       ODP_PMR_VLAN_ID_0,</span></td></tr>
+      <tr><td class="lblock"><span class="delete">7*/</span></td><td> </td><td class="rblock"><span class="insert"></span></td></tr>
+      <tr><td class="lblock"><span class="delete">       ODP_PMR_TCP_DPORT,      /**&lt;</span> Destination TCP port <span class="delete">implies IPPROTO=6*</span></td><td> </td><td class="rblock"><span class="insert">       /**</span> Last <span class="insert">(most inner)</span> VLAN ID <span class="insert">(val_sz = 2)</span> */</td></tr>
+      <tr><td class="lblock"><span class="delete">/</span></td><td> </td><td class="rblock">       <span class="insert">ODP_PMR_VLAN_ID_X,</span></td></tr>
+      <tr><td class="lblock"><span class="delete">       ODP_PMR_UDP_SPORT,      /**&lt;</span> Source UDP <span class="delete">Port (*val=uint16_t)*/</span></td><td> </td><td class="rblock"><span class="insert"></span></td></tr>
+      <tr><td class="lblock"><span class="delete">       ODP_PMR_TCP_SPORT,      /**&lt;</span> Source TCP port <span class="delete">(*val=uint16_t)*/</span></td><td> </td><td class="rblock"><span class="insert">       /** Destination</span> MAC address <span class="insert">(val_sz = 6)</span> */</td></tr>
+      <tr><td class="lblock"><span class="delete">       ODP_PMR_SIP_ADDR,       /**&lt;</span> Source <span class="delete">IP</span> address <span class="delete">(uint32_t)*/</span></td><td> </td><td class="rblock">       <span class="insert">ODP_PMR_DMAC,</span></td></tr>
+      <tr><td class="lblock"><span class="delete">       ODP_PMR_DIP_ADDR,       /**&lt;</span> Destination <span class="delete">IP</span> address <span class="delete">(uint32_t)*/</span></td><td> </td><td class="rblock"><span class="insert"></span></td></tr>
+      <tr><td class="lblock"><span class="delete">       ODP_PMR_SIP6_ADDR,      /**&lt;</span> Source <span class="delete">IP</span> address <span class="delete">(uint8_t[16])*/</span></td><td> </td><td class="rblock"><span class="insert">       /** IPv4</span> Protocol or IPv6 Next Header <span class="insert">(val_sz = 1)</span> */</td></tr>
+      <tr><td class="lblock"><span class="delete">       ODP_PMR_DIP6_ADDR,      /**&lt;</span> Destination <span class="delete">IP</span> address <span class="delete">(uint8_t[16])*/</span></td><td> </td><td class="rblock">       <span class="insert">ODP_PMR_IPPROTO,</span></td></tr>
+      <tr><td class="lblock"><span class="delete">       ODP_PMR_IPSEC_SPI,      /**&lt;</span> IPsec session <span class="delete">identifier(*val=uint32_t)</span></td><td> </td><td class="rblock"><span class="insert"></span></td></tr>
+      <tr><td class="lblock"><span class="delete">*/</span></td><td> </td><td class="rblock"><span class="insert">       /**</span> Destination UDP <span class="insert">port (val_sz = 2) */</span></td></tr>
+      <tr><td class="lblock"><span class="delete">       ODP_PMR_LD_VNI,         /**&lt;</span> NVGRE/VXLAN network identifier</td><td> </td><td class="rblock"><span class="insert">       ODP_PMR_UDP_DPORT,</span></td></tr>
+      <tr><td class="lblock">                               <span class="delete">(*val=uint32_t)*/</span></td><td> </td><td class="rblock"><span class="insert"></span></td></tr>
+      <tr><td class="lblock"><span class="delete">       ODP_PMR_CUSTOM_FRAME,   /**&lt;</span> Custom match <span class="delete">rule,</span> offset from start of</td><td> </td><td class="rblock"><span class="insert">       /**</span> Destination TCP port <span class="insert">(val_sz = 2) */</span></td></tr>
+      <tr><td class="lblock">                               <span class="delete">frame.</span> The match is defined by the offset, <span class="delete">t</span></td><td> </td><td class="rblock"><span class="insert">       ODP_PMR_TCP_DPORT,</span></td></tr>
+      <tr><td class="lblock"><span class="delete">he</span></td><td> </td><td class="rblock"><span class="insert"></span></td></tr>
+      <tr><td class="lblock">                               expected value, and its size. <span class="delete">They</span> must be</td><td> </td><td class="rblock"><span class="insert">       /**</span> Source UDP <span class="insert">port (val_sz = 2) */</span></td></tr>
+      <tr><td class="lblock">                               applied before any other PMR.</td><td> </td><td class="rblock"><span class="insert">       ODP_PMR_UDP_SPORT,</span></td></tr>
+      <tr><td class="lblock">                               <span class="delete">(*val=uint8_t[val_sz])*/</span></td><td> </td><td class="rblock"><span class="insert"></span></td></tr>
+      <tr><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">       /**</span> Source TCP port <span class="insert">(val_sz = 2) */</span></td></tr>
+      <tr><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">       ODP_PMR_TCP_SPORT,</span></td></tr>
+      <tr><td class="lblock"></td><td> </td><td class="rblock"><span class="insert"></span></td></tr>
+      <tr><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">       /**</span> Source <span class="insert">IPv4</span> address <span class="insert">(val_sz = 4) */</span></td></tr>
+      <tr><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">       ODP_PMR_SIP_ADDR,</span></td></tr>
+      <tr><td class="lblock"></td><td> </td><td class="rblock"><span class="insert"></span></td></tr>
+      <tr><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">       /**</span> Destination <span class="insert">IPv4</span> address <span class="insert">(val_sz = 4) */</span></td></tr>
+      <tr><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">       ODP_PMR_DIP_ADDR,</span></td></tr>
+      <tr><td class="lblock"></td><td> </td><td class="rblock"><span class="insert"></span></td></tr>
+      <tr><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">       /**</span> Source <span class="insert">IPv6</span> address <span class="insert">(val_sz = 16) */</span></td></tr>
+      <tr><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">       ODP_PMR_SIP6_ADDR,</span></td></tr>
+      <tr><td class="lblock"></td><td> </td><td class="rblock"><span class="insert"></span></td></tr>
+      <tr><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">       /**</span> Destination <span class="insert">IPv6</span> address <span class="insert">(val_sz = 16) */</span></td></tr>
+      <tr><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">       ODP_PMR_DIP6_ADDR,</span></td></tr>
+      <tr><td class="lblock"></td><td> </td><td class="rblock"><span class="insert"></span></td></tr>
+      <tr><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">       /**</span> IPsec session <span class="insert">identifier (val_sz = 4)*/</span></td></tr>
+      <tr><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">       ODP_PMR_IPSEC_SPI,</span></td></tr>
+      <tr><td class="lblock"></td><td> </td><td class="rblock"><span class="insert"></span></td></tr>
+      <tr><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">       /**</span> NVGRE/VXLAN network identifier <span class="insert">(val_sz = 4) */</span></td></tr>
+      <tr><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">       ODP_PMR_LD_VNI,</span></td></tr>
+      <tr><td class="lblock"></td><td> </td><td class="rblock"><span class="insert"></span></td></tr>
+      <tr><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">       /**</span></td></tr>
+      <tr><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">        *</span> Custom <span class="insert">frame</span> match <span class="insert">rule</span></td></tr>
+      <tr><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">        *</span></td></tr>
+      <tr><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">        * PMR</span> offset <span class="insert">is counted</span> from <span class="insert">the</span> start of <span class="insert">the packet.</span> The match is</td></tr>
+      <tr><td class="lblock"></td><td> </td><td class="rblock">        <span class="insert">*</span> defined by the offset, <span class="insert">the</span> expected value, and its size. <span class="insert">Custom f</span></td></tr>
+      <tr><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">rame</span></td></tr>
+      <tr><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">        * rules</span> must be applied before any other PMR.</td></tr>
+      <tr><td class="lblock"></td><td> </td><td class="rblock">        <span class="insert">*/</span></td></tr>
+      <tr><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">       ODP_PMR_CUSTOM_FRAME,</span></td></tr>
+      <tr><td class="lblock"></td><td> </td><td class="rblock"><span class="insert"></span></td></tr>
+      <tr><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">       /**</span></td></tr>
+      <tr><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">        * Custom layer 3 match rule</span></td></tr>
+      <tr><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">        *</span></td></tr>
+      <tr><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">        * PMR offset is counted from the start of layer 3 in the packet.</span></td></tr>
+      <tr><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">        * The match is defined by the offset, the expected value, and its s</span></td></tr>
+      <tr><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">ize.</span></td></tr>
+      <tr><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">        * Custom L3 rules may be combined with other PMRs.</span></td></tr>
+      <tr><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">        */</span></td></tr>
+      <tr><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">       ODP_PMR_CUSTOM_L3,</span></td></tr>
+      <tr><td class="left"></td><td> </td><td class="right"></td></tr>
+      <tr><td class="left">       /** Inner header may repeat above values with this offset */</td><td> </td><td class="right">       /** Inner header may repeat above values with this offset */</td></tr>
+      <tr><td class="left">       ODP_PMR_INNER_HDR_OFF = 32</td><td> </td><td class="right">       ODP_PMR_INNER_HDR_OFF = 32</td></tr>
+      <tr><td><a name="diff0008" /></td></tr>
+      <tr><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">                                                                           </span></td></tr>
+      <tr><td class="left">} odp_cls_pmr_term_t;</td><td> </td><td class="right">} odp_cls_pmr_term_t;</td></tr>
+      <tr><td class="left"></td><td> </td><td class="right"></td></tr>
+      <tr><td class="left">/**</td><td> </td><td class="right">/**</td></tr>
+      <tr><td class="left"> * Packet Matching Rule parameter structure</td><td> </td><td class="right"> * Packet Matching Rule parameter structure</td></tr>
+      <tr><td><a name="diff0009" /></td></tr>
+      <tr><td class="lblock"></td><td> </td><td class="rblock"> <span class="insert">*</span></td></tr>
+      <tr><td class="lblock"></td><td> </td><td class="rblock"><span class="insert"> * Match value/mask size and endianness are defined in PMR term documentati</span></td></tr>
+      <tr><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">on</span></td></tr>
+      <tr><td class="lblock"></td><td> </td><td class="rblock"><span class="insert"> * (@see odp_cls_pmr_term_t). Most values and masks are passed in big</span></td></tr>
+      <tr><td class="lblock"></td><td> </td><td class="rblock"><span class="insert"> * endian format without data alignment requirement. ODP_PMR_LEN is</span></td></tr>
+      <tr><td class="lblock"></td><td> </td><td class="rblock"><span class="insert"> * an exception to this (uint32_t in CPU endian).</span></td></tr>
+      <tr><td class="left"> */</td><td> </td><td class="right"> */</td></tr>
+      <tr><td class="left">typedef struct odp_pmr_param_t {</td><td> </td><td class="right">typedef struct odp_pmr_param_t {</td></tr>
+      <tr><td class="left">       odp_cls_pmr_term_t  term;       /**&lt; Packet Matching Rule term */</td><td> </td><td class="right">       odp_cls_pmr_term_t  term;       /**&lt; Packet Matching Rule term */</td></tr>
+      <tr><td class="left"></td><td> </td><td class="right"></td></tr>
+      <tr><td class="left">       /** True if the value is range and false if match */</td><td> </td><td class="right">       /** True if the value is range and false if match */</td></tr>
+      <tr><td class="left">       odp_bool_t range_term;</td><td> </td><td class="right">       odp_bool_t range_term;</td></tr>
+      <tr><td class="left"></td><td> </td><td class="right"></td></tr>
+      <tr><td class="left">       /** Variant mappings for types of matches */</td><td> </td><td class="right">       /** Variant mappings for types of matches */</td></tr>
+      <tr><td class="left">       union {</td><td> </td><td class="right">       union {</td></tr>
+      <tr><td class="left">               /** Parameters for single-valued matches */</td><td> </td><td class="right">               /** Parameters for single-valued matches */</td></tr>
+      <tr><td class="left">               struct {</td><td> </td><td class="right">               struct {</td></tr>
+      <tr><td><a name="diff0010" /></td></tr>
+      <tr><td class="lblock">                       /** <span class="delete">Value</span> to be <span class="delete">matched</span> */</td><td> </td><td class="rblock">                       /** <span class="insert">Points to the value</span> to be <span class="insert">matched. Value size an</span></td></tr>
+      <tr><td class="lblock">                       const void      *value;</td><td> </td><td class="rblock"><span class="insert">d</span></td></tr>
+      <tr><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">                        *  endianness are defined by the term used. Values </span></td></tr>
+      <tr><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">of</span></td></tr>
+      <tr><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">                        *  protocol fields are defined in big endian format</span></td></tr>
+      <tr><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">.</span></td></tr>
+      <tr><td class="lblock"></td><td> </td><td class="rblock">                        */</td></tr>
+      <tr><td class="lblock"></td><td> </td><td class="rblock">                       const void *value;</td></tr>
+      <tr><td class="left"></td><td> </td><td class="right"></td></tr>
+      <tr><td><a name="diff0011" /></td></tr>
+      <tr><td class="lblock">                       /** <span class="delete">Masked set</span> of bits to be <span class="delete">matched</span> */</td><td> </td><td class="rblock">                       /** <span class="insert">Mask</span> of <span class="insert">the</span> bits to be <span class="insert">matched. The same size an</span></td></tr>
+      <tr><td class="lblock">                       const void      *mask;</td><td> </td><td class="rblock"><span class="insert">d</span></td></tr>
+      <tr><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">                        *  endianness is used than with the value.</span> */</td></tr>
+      <tr><td class="lblock"></td><td> </td><td class="rblock">                       const void *mask;</td></tr>
+      <tr><td class="left">               } match;</td><td> </td><td class="right">               } match;</td></tr>
+      <tr><td class="left"></td><td> </td><td class="right"></td></tr>
+      <tr><td class="left">               /** Parameter for range value matches */</td><td> </td><td class="right">               /** Parameter for range value matches */</td></tr>
+      <tr><td class="left">               struct {</td><td> </td><td class="right">               struct {</td></tr>
+      <tr><td><a name="diff0012" /></td></tr>
+      <tr><td class="lblock">                       /** Start <span class="delete">and End values are included in the range *</span></td><td> </td><td class="rblock">                       /** Start value of <span class="insert">the</span> range */</td></tr>
+      <tr><td class="lblock"><span class="delete">/</span></td><td> </td><td class="rblock">                       const void *val_start;</td></tr>
+      <tr><td class="lblock"><span class="delete">                       /** start</span> value of range */</td><td> </td><td class="rblock"></td></tr>
+      <tr><td class="lblock">                       const void      *val_start;</td><td> </td><td class="rblock"></td></tr>
+      <tr><td class="left"></td><td> </td><td class="right"></td></tr>
+      <tr><td><a name="diff0013" /></td></tr>
+      <tr><td class="lblock">                       /** End value of range */</td><td> </td><td class="rblock">                       /** End value of <span class="insert">the</span> range */</td></tr>
+      <tr><td class="lblock">                       const void      *val_end;</td><td> </td><td class="rblock">                       const void *val_end;</td></tr>
+      <tr><td class="left">               } range;</td><td> </td><td class="right">               } range;</td></tr>
+      <tr><td class="left">       };</td><td> </td><td class="right">       };</td></tr>
+      <tr><td><a name="diff0014" /></td></tr>
+      <tr><td class="lblock"><span class="delete">       uint32_t        val_sz;  /**&lt; Size of the term value */</span></td><td> </td><td class="rblock"></td></tr>
+      <tr><td class="left"></td><td> </td><td class="right"></td></tr>
+      <tr><td><a name="diff0015" /></td></tr>
+      <tr><td class="lblock">       uint32_t        <span class="delete">offset;  /**&lt; User-defined</span> offset in <span class="delete">packet</span></td><td> </td><td class="rblock">       <span class="insert">/** Size of the value to be matched */</span></td></tr>
+      <tr><td class="lblock"><span class="delete">                                Used if</span> term <span class="delete">== ODP_PMR_CUSTOM_FRAME only,</span></td><td> </td><td class="rblock">       uint32_t <span class="insert">val_sz;</span></td></tr>
+      <tr><td class="lblock">                                ignored <span class="delete">otherwise</span> */</td><td> </td><td class="rblock"><span class="insert"></span></td></tr>
+      <tr><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">       /** Offset to the value</span></td></tr>
+      <tr><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">        *</span></td></tr>
+      <tr><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">        * Byte</span> offset <span class="insert">to the value to be matched</span> in <span class="insert">a packet. PMR</span> term <span class="insert">defi</span></td></tr>
+      <tr><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">nes</span></td></tr>
+      <tr><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">        * starting point for the offset. Used only with custom PMR terms,</span></td></tr>
+      <tr><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">        *</span> ignored <span class="insert">with other terms.</span></td></tr>
+      <tr><td class="lblock"></td><td> </td><td class="rblock">        */</td></tr>
+      <tr><td class="lblock"></td><td> </td><td class="rblock">       <span class="insert">uint32_t offset;</span></td></tr>
+      <tr><td class="lblock"></td><td> </td><td class="rblock">                                                                           </td></tr>
+      <tr><td class="left">} odp_pmr_param_t;</td><td> </td><td class="right">} odp_pmr_param_t;</td></tr>
+      <tr><td class="left"></td><td> </td><td class="right"></td></tr>
+      <tr><td class="left">/**</td><td> </td><td class="right">/**</td></tr>
+      <tr><td class="left"> * Initialize packet matching rule parameters</td><td> </td><td class="right"> * Initialize packet matching rule parameters</td></tr>
+      <tr><td class="left"> *</td><td> </td><td class="right"> *</td></tr>
+      <tr><td class="left"> * Initialize an odp_pmr_param_t to its default values for all fields</td><td> </td><td class="right"> * Initialize an odp_pmr_param_t to its default values for all fields</td></tr>
+      <tr><td class="left"> *</td><td> </td><td class="right"> *</td></tr>
+      <tr><td class="left"> * @param param        Address of the odp_pmr_param_t to be initialized</td><td> </td><td class="right"> * @param param        Address of the odp_pmr_param_t to be initialized</td></tr>
+      <tr><td class="left"> */</td><td> </td><td class="right"> */</td></tr>
+      <tr><td class="left">void odp_cls_pmr_param_init(odp_pmr_param_t *param);</td><td> </td><td class="right">void odp_cls_pmr_param_init(odp_pmr_param_t *param);</td></tr>
+
+     <tr><td class="left"></td><td> </td><td class="right"></td></tr>
+     <tr bgcolor="gray"><th colspan="5" align="center"><a name="end">&nbsp;End of changes. 15 change blocks.&nbsp;</a></th></tr>
+     <tr class="stats"><th><i>58 lines changed or deleted</i></th><th><i> </i></th><th><i>131 lines changed or added</i></th></tr>
+     <tr><td colspan="5" align="center" class="small"></td></tr>
+   </table>
+   <br/><br/>
+ 
+  <table class='diff_tbl' border="0" cellpadding="0" cellspacing="0"> 
+  <tr bgcolor="orange"><th>&nbsp;packet_io.h (1.22.0.0)&nbsp;</th><th> </th><th>&nbsp;packet_io.h (1.23.0.0)&nbsp;</th></tr> 
+      <tr><td class="left"></td><td> </td><td class="right"></td></tr>
+      <tr bgcolor="gray" ><th><a name="part-l1" /><small>skipping to change at</small><em> line 204</em></th><th> </th><th><a name="part-r1" /><small>skipping to change at</small><em> line 204</em></th></tr>
+      <tr><td class="left">         * zero. The default value is all bits zero. */</td><td> </td><td class="right">         * zero. The default value is all bits zero. */</td></tr>
+      <tr><td class="left">       odp_pktin_hash_proto_t hash_proto;</td><td> </td><td class="right">       odp_pktin_hash_proto_t hash_proto;</td></tr>
+      <tr><td class="left"></td><td> </td><td class="right"></td></tr>
+      <tr><td class="left">       /** Number of input queues to be created</td><td> </td><td class="right">       /** Number of input queues to be created</td></tr>
+      <tr><td class="left">         *</td><td> </td><td class="right">         *</td></tr>
+      <tr><td class="left">         * When classifier is enabled in odp_pktin_queue_config() this</td><td> </td><td class="right">         * When classifier is enabled in odp_pktin_queue_config() this</td></tr>
+      <tr><td class="left">         * value is ignored, otherwise at least one queue is required.</td><td> </td><td class="right">         * value is ignored, otherwise at least one queue is required.</td></tr>
+      <tr><td class="left">         * More than one input queues require flow hashing configured.</td><td> </td><td class="right">         * More than one input queues require flow hashing configured.</td></tr>
+      <tr><td class="left">         * The maximum value is defined by pktio capability 'max_input_queu
+es'.</td><td> </td><td class="right">         * The maximum value is defined by pktio capability 'max_input_queu
+es'.</td></tr>
+      <tr><td class="left">         * Queue type is defined by the input mode. The default value is 1.
+ */</td><td> </td><td class="right">         * Queue type is defined by the input mode. The default value is 1.
+ */</td></tr>
+      <tr><td><a name="diff0001" /></td></tr>
+      <tr><td class="lblock">       unsigned num_queues;</td><td> </td><td class="rblock">       unsigned <span class="insert">int </span>num_queues;</td></tr>
+      <tr><td class="left"></td><td> </td><td class="right"></td></tr>
+      <tr><td class="left">       /** Queue parameters</td><td> </td><td class="right">       /** Queue parameters</td></tr>
+      <tr><td class="left">         *</td><td> </td><td class="right">         *</td></tr>
+      <tr><td class="left">         * These are used for input queue creation in ODP_PKTIN_MODE_QUEUE</td><td> </td><td class="right">         * These are used for input queue creation in ODP_PKTIN_MODE_QUEUE</td></tr>
+      <tr><td class="left">         * or ODP_PKTIN_MODE_SCHED modes. Scheduler parameters are consider
+ed</td><td> </td><td class="right">         * or ODP_PKTIN_MODE_SCHED modes. Scheduler parameters are consider
+ed</td></tr>
+      <tr><td class="left">         * only in ODP_PKTIN_MODE_SCHED mode. Default values are defined in</td><td> </td><td class="right">         * only in ODP_PKTIN_MODE_SCHED mode. Default values are defined in</td></tr>
+      <tr><td class="left">         * odp_queue_param_t documentation.</td><td> </td><td class="right">         * odp_queue_param_t documentation.</td></tr>
+      <tr><td class="left">         * When classifier is enabled in odp_pktin_queue_config() this</td><td> </td><td class="right">         * When classifier is enabled in odp_pktin_queue_config() this</td></tr>
+      <tr><td class="left">         * value is ignored. */</td><td> </td><td class="right">         * value is ignored. */</td></tr>
+      <tr><td class="left">       odp_queue_param_t queue_param;</td><td> </td><td class="right">       odp_queue_param_t queue_param;</td></tr>
+      <tr><td class="left"></td><td> </td><td class="right"></td></tr>
+      <tr bgcolor="gray" ><th><a name="part-l2" /><small>skipping to change at</small><em> line 246</em></th><th> </th><th><a name="part-r2" /><small>skipping to change at</small><em> line 246</em></th></tr>
+      <tr><td class="left">typedef struct odp_pktout_queue_param_t {</td><td> </td><td class="right">typedef struct odp_pktout_queue_param_t {</td></tr>
+      <tr><td class="left">       /** Operation mode</td><td> </td><td class="right">       /** Operation mode</td></tr>
+      <tr><td class="left">         *</td><td> </td><td class="right">         *</td></tr>
+      <tr><td class="left">         * The default value is ODP_PKTIO_OP_MT. Application may enable</td><td> </td><td class="right">         * The default value is ODP_PKTIO_OP_MT. Application may enable</td></tr>
+      <tr><td class="left">         * performance optimization by defining ODP_PKTIO_OP_MT_UNSAFE when</td><td> </td><td class="right">         * performance optimization by defining ODP_PKTIO_OP_MT_UNSAFE when</td></tr>
+      <tr><td class="left">         * applicable. */</td><td> </td><td class="right">         * applicable. */</td></tr>
+      <tr><td class="left">       odp_pktio_op_mode_t op_mode;</td><td> </td><td class="right">       odp_pktio_op_mode_t op_mode;</td></tr>
+      <tr><td class="left"></td><td> </td><td class="right"></td></tr>
+      <tr><td class="left">       /** Number of output queues to be created. The value must be between</td><td> </td><td class="right">       /** Number of output queues to be created. The value must be between</td></tr>
+      <tr><td class="left">         * 1 and interface capability. The default value is 1. */</td><td> </td><td class="right">         * 1 and interface capability. The default value is 1. */</td></tr>
+      <tr><td><a name="diff0002" /></td></tr>
+      <tr><td class="lblock">       unsigned num_queues;</td><td> </td><td class="rblock">       unsigned <span class="insert">int </span>num_queues;</td></tr>
+      <tr><td class="left"></td><td> </td><td class="right"></td></tr>
+      <tr><td class="left">} odp_pktout_queue_param_t;</td><td> </td><td class="right">} odp_pktout_queue_param_t;</td></tr>
+      <tr><td class="left"></td><td> </td><td class="right"></td></tr>
+      <tr><td class="left">/**</td><td> </td><td class="right">/**</td></tr>
+      <tr><td class="left"> * Packet IO parameters</td><td> </td><td class="right"> * Packet IO parameters</td></tr>
+      <tr><td class="left"> *</td><td> </td><td class="right"> *</td></tr>
+      <tr><td class="left"> * Packet IO interface level parameters. Use odp_pktio_param_init() to</td><td> </td><td class="right"> * Packet IO interface level parameters. Use odp_pktio_param_init() to</td></tr>
+      <tr><td class="left"> * initialize the structure with default values.</td><td> </td><td class="right"> * initialize the structure with default values.</td></tr>
+      <tr><td class="left"> */</td><td> </td><td class="right"> */</td></tr>
+      <tr><td class="left">typedef struct odp_pktio_param_t {</td><td> </td><td class="right">typedef struct odp_pktio_param_t {</td></tr>
+      <tr><td class="left"></td><td> </td><td class="right"></td></tr>
+      <tr bgcolor="gray" ><th><a name="part-l3" /><small>skipping to change at</small><em> line 554</em></th><th> </th><th><a name="part-r3" /><small>skipping to change at</small><em> line 554</em></th></tr>
+      <tr><td class="left">         * This field can be used to set/clear all flags, or bitwise</td><td> </td><td class="right">         * This field can be used to set/clear all flags, or bitwise</td></tr>
+      <tr><td class="left">         * operations over the entire structure. */</td><td> </td><td class="right">         * operations over the entire structure. */</td></tr>
+      <tr><td class="left">       uint32_t all_bits;</td><td> </td><td class="right">       uint32_t all_bits;</td></tr>
+      <tr><td class="left">} odp_pktio_set_op_t;</td><td> </td><td class="right">} odp_pktio_set_op_t;</td></tr>
+      <tr><td class="left"></td><td> </td><td class="right"></td></tr>
+      <tr><td class="left">/**</td><td> </td><td class="right">/**</td></tr>
+      <tr><td class="left"> * Packet IO capabilities</td><td> </td><td class="right"> * Packet IO capabilities</td></tr>
+      <tr><td class="left"> */</td><td> </td><td class="right"> */</td></tr>
+      <tr><td class="left">typedef struct odp_pktio_capability_t {</td><td> </td><td class="right">typedef struct odp_pktio_capability_t {</td></tr>
+      <tr><td class="left">       /** Maximum number of input queues */</td><td> </td><td class="right">       /** Maximum number of input queues */</td></tr>
+      <tr><td><a name="diff0003" /></td></tr>
+      <tr><td class="lblock">       unsigned max_input_queues;</td><td> </td><td class="rblock">       unsigned <span class="insert">int </span>max_input_queues;</td></tr>
+      <tr><td class="left"></td><td> </td><td class="right"></td></tr>
+      <tr><td class="left">       /** Maximum number of output queues */</td><td> </td><td class="right">       /** Maximum number of output queues */</td></tr>
+      <tr><td><a name="diff0004" /></td></tr>
+      <tr><td class="lblock">       unsigned max_output_queues;</td><td> </td><td class="rblock">       unsigned <span class="insert">int </span>max_output_queues;</td></tr>
+      <tr><td class="left"></td><td> </td><td class="right"></td></tr>
+      <tr><td class="left">       /** Supported pktio configuration options */</td><td> </td><td class="right">       /** Supported pktio configuration options */</td></tr>
+      <tr><td class="left">       odp_pktio_config_t config;</td><td> </td><td class="right">       odp_pktio_config_t config;</td></tr>
+      <tr><td class="left"></td><td> </td><td class="right"></td></tr>
+      <tr><td class="left">       /** Supported set operations</td><td> </td><td class="right">       /** Supported set operations</td></tr>
+      <tr><td class="left">        *</td><td> </td><td class="right">        *</td></tr>
+      <tr><td class="left">        * A bit set to one indicates a supported operation. All other bits 
+are</td><td> </td><td class="right">        * A bit set to one indicates a supported operation. All other bits 
+are</td></tr>
+      <tr><td class="left">        * set to zero. */</td><td> </td><td class="right">        * set to zero. */</td></tr>
+      <tr><td class="left">       odp_pktio_set_op_t set_op;</td><td> </td><td class="right">       odp_pktio_set_op_t set_op;</td></tr>
+      <tr><td class="left"></td><td> </td><td class="right"></td></tr>
+      <tr><td class="left"></td><td> </td><td class="right"></td></tr>
+      <tr bgcolor="gray" ><th><a name="part-l4" /><small>skipping to change at</small><em> line 653</em></th><th> </th><th><a name="part-r4" /><small>skipping to change at</small><em> line 653</em></th></tr>
+      <tr><td class="left">int odp_pktio_capability(odp_pktio_t pktio, odp_pktio_capability_t *capa);</td><td> </td><td class="right">int odp_pktio_capability(odp_pktio_t pktio, odp_pktio_capability_t *capa);</td></tr>
+      <tr><td class="left"></td><td> </td><td class="right"></td></tr>
+      <tr><td class="left">/**</td><td> </td><td class="right">/**</td></tr>
+      <tr><td class="left"> * Maximum packet IO interface index</td><td> </td><td class="right"> * Maximum packet IO interface index</td></tr>
+      <tr><td class="left"> *</td><td> </td><td class="right"> *</td></tr>
+      <tr><td class="left"> * Return the maximum packet IO interface index. Interface indexes</td><td> </td><td class="right"> * Return the maximum packet IO interface index. Interface indexes</td></tr>
+      <tr><td class="left"> * (e.g. returned by odp_pktio_index()) range from zero to this maximum val
+ue.</td><td> </td><td class="right"> * (e.g. returned by odp_pktio_index()) range from zero to this maximum val
+ue.</td></tr>
+      <tr><td class="left"> *</td><td> </td><td class="right"> *</td></tr>
+      <tr><td class="left"> * @return Maximum packet IO interface index</td><td> </td><td class="right"> * @return Maximum packet IO interface index</td></tr>
+      <tr><td class="left"> */</td><td> </td><td class="right"> */</td></tr>
+      <tr><td><a name="diff0005" /></td></tr>
+      <tr><td class="lblock">unsigned odp_pktio_max_index(void);</td><td> </td><td class="rblock">unsigned <span class="insert">int </span>odp_pktio_max_index(void);</td></tr>
+      <tr><td class="left"></td><td> </td><td class="right"></td></tr>
+      <tr><td class="left">/**</td><td> </td><td class="right">/**</td></tr>
+      <tr><td class="left"> * Configure packet IO interface options</td><td> </td><td class="right"> * Configure packet IO interface options</td></tr>
+      <tr><td class="left"> *</td><td> </td><td class="right"> *</td></tr>
+      <tr><td class="left"> * Select interface level configuration options before the interface is</td><td> </td><td class="right"> * Select interface level configuration options before the interface is</td></tr>
+      <tr><td class="left"> * activated (before odp_pktio_start() call). This step is optional in pkti
+o</td><td> </td><td class="right"> * activated (before odp_pktio_start() call). This step is optional in pkti
+o</td></tr>
+      <tr><td class="left"> * interface setup sequence. Use odp_pktio_capability() to query configurat
+ion</td><td> </td><td class="right"> * interface setup sequence. Use odp_pktio_capability() to query configurat
+ion</td></tr>
+      <tr><td class="left"> * capabilities. Use odp_pktio_config_init() to initialize</td><td> </td><td class="right"> * capabilities. Use odp_pktio_config_init() to initialize</td></tr>
+      <tr><td class="left"> * configuration options into their default values. Default values are used</td><td> </td><td class="right"> * configuration options into their default values. Default values are used</td></tr>
+      <tr><td class="left"> * when 'config' pointer is NULL.</td><td> </td><td class="right"> * when 'config' pointer is NULL.</td></tr>
+      <tr><td class="left"></td><td> </td><td class="right"></td></tr>
+      <tr bgcolor="gray" ><th><a name="part-l5" /><small>skipping to change at</small><em> line 950</em></th><th> </th><th><a name="part-r5" /><small>skipping to change at</small><em> line 950</em></th></tr>
+      <tr><td class="left"> * @param      wait       Wait time specified as as follows:</td><td> </td><td class="right"> * @param      wait       Wait time specified as as follows:</td></tr>
+      <tr><td class="left"> *                        * ODP_PKTIN_NO_WAIT: Do not wait</td><td> </td><td class="right"> *                        * ODP_PKTIN_NO_WAIT: Do not wait</td></tr>
+      <tr><td class="left"> *                        * Other values specify the minimum time to wait.</td><td> </td><td class="right"> *                        * Other values specify the minimum time to wait.</td></tr>
+      <tr><td class="left"> *                          Use odp_pktin_wait_time() to convert nanosecond
+s</td><td> </td><td class="right"> *                          Use odp_pktin_wait_time() to convert nanosecond
+s</td></tr>
+      <tr><td class="left"> *                          to a valid parameter value. Wait time may be</td><td> </td><td class="right"> *                          to a valid parameter value. Wait time may be</td></tr>
+      <tr><td class="left"> *                          rounded up a small, platform specific amount.</td><td> </td><td class="right"> *                          rounded up a small, platform specific amount.</td></tr>
+      <tr><td class="left"> *</td><td> </td><td class="right"> *</td></tr>
+      <tr><td class="left"> * @return Number of packets received</td><td> </td><td class="right"> * @return Number of packets received</td></tr>
+      <tr><td class="left"> * @retval &lt;0 on failure</td><td> </td><td class="right"> * @retval &lt;0 on failure</td></tr>
+      <tr><td class="left"> */</td><td> </td><td class="right"> */</td></tr>
+      <tr><td><a name="diff0006" /></td></tr>
+      <tr><td class="lblock">int odp_pktin_recv_mq_tmo(const odp_pktin_queue_t queues[], unsigned <span class="delete">num_q,</span></td><td> </td><td class="rblock">int odp_pktin_recv_mq_tmo(const odp_pktin_queue_t queues[], unsigned <span class="insert">int nu</span></td></tr>
+      <tr><td class="lblock">                         unsigned *from, odp_packet_t packets[], int <span class="delete">num,</span></td><td> </td><td class="rblock"><span class="insert">m_q,</span></td></tr>
+      <tr><td class="lblock"></td><td> </td><td class="rblock">                         unsigned <span class="insert">int</span> *from, odp_packet_t packets[], int <span class="insert">nu</span></td></tr>
+      <tr><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">m,</span></td></tr>
+      <tr><td class="left">                         uint64_t wait);</td><td> </td><td class="right">                         uint64_t wait);</td></tr>
+      <tr><td class="left"></td><td> </td><td class="right"></td></tr>
+      <tr><td class="left">/**</td><td> </td><td class="right">/**</td></tr>
+      <tr><td class="left"> * Packet input wait time</td><td> </td><td class="right"> * Packet input wait time</td></tr>
+      <tr><td class="left"> *</td><td> </td><td class="right"> *</td></tr>
+      <tr><td class="left"> * Converts nanoseconds to wait time values for packet input functions.</td><td> </td><td class="right"> * Converts nanoseconds to wait time values for packet input functions.</td></tr>
+      <tr><td class="left"> *</td><td> </td><td class="right"> *</td></tr>
+      <tr><td class="left"> * @param nsec   Minimum number of nanoseconds to wait</td><td> </td><td class="right"> * @param nsec   Minimum number of nanoseconds to wait</td></tr>
+      <tr><td class="left"> *</td><td> </td><td class="right"> *</td></tr>
+      <tr><td class="left"> * @return Wait parameter value for packet input functions</td><td> </td><td class="right"> * @return Wait parameter value for packet input functions</td></tr>
+
+     <tr><td class="left"></td><td> </td><td class="right"></td></tr>
+     <tr bgcolor="gray"><th colspan="5" align="center"><a name="end">&nbsp;End of changes. 6 change blocks.&nbsp;</a></th></tr>
+     <tr class="stats"><th><i>7 lines changed or deleted</i></th><th><i> </i></th><th><i>9 lines changed or added</i></th></tr>
+     <tr><td colspan="5" align="center" class="small"></td></tr>
+   </table>
+   <br/><br/>
+ 
+  <table class='diff_tbl' border="0" cellpadding="0" cellspacing="0"> 
+  <tr bgcolor="orange"><th>&nbsp;pool.h (1.22.0.0)&nbsp;</th><th> </th><th>&nbsp;pool.h (1.23.0.0)&nbsp;</th></tr> 
+      <tr><td class="left"></td><td> </td><td class="right"></td></tr>
+      <tr bgcolor="gray" ><th><a name="part-l1" /><small>skipping to change at</small><em> line 51</em></th><th> </th><th><a name="part-r1" /><small>skipping to change at</small><em> line 51</em></th></tr>
+      <tr><td class="left"> */</td><td> </td><td class="right"> */</td></tr>
+      <tr><td class="left"></td><td> </td><td class="right"></td></tr>
+      <tr><td class="left">/** Maximum number of packet pool subparameters */</td><td> </td><td class="right">/** Maximum number of packet pool subparameters */</td></tr>
+      <tr><td class="left">#define ODP_POOL_MAX_SUBPARAMS  7</td><td> </td><td class="right">#define ODP_POOL_MAX_SUBPARAMS  7</td></tr>
+      <tr><td class="left"></td><td> </td><td class="right"></td></tr>
+      <tr><td class="left">/**</td><td> </td><td class="right">/**</td></tr>
+      <tr><td class="left"> * Pool capabilities</td><td> </td><td class="right"> * Pool capabilities</td></tr>
+      <tr><td class="left"> */</td><td> </td><td class="right"> */</td></tr>
+      <tr><td class="left">typedef struct odp_pool_capability_t {</td><td> </td><td class="right">typedef struct odp_pool_capability_t {</td></tr>
+      <tr><td class="left">       /** Maximum number of pools of any type */</td><td> </td><td class="right">       /** Maximum number of pools of any type */</td></tr>
+      <tr><td><a name="diff0001" /></td></tr>
+      <tr><td class="lblock">       unsigned max_pools;</td><td> </td><td class="rblock">       unsigned <span class="insert">int </span>max_pools;</td></tr>
+      <tr><td class="left"></td><td> </td><td class="right"></td></tr>
+      <tr><td class="left">       /** Buffer pool capabilities  */</td><td> </td><td class="right">       /** Buffer pool capabilities  */</td></tr>
+      <tr><td class="left">       struct {</td><td> </td><td class="right">       struct {</td></tr>
+      <tr><td class="left">               /** Maximum number of buffer pools */</td><td> </td><td class="right">               /** Maximum number of buffer pools */</td></tr>
+      <tr><td><a name="diff0002" /></td></tr>
+      <tr><td class="lblock">               unsigned max_pools;</td><td> </td><td class="rblock">               unsigned <span class="insert">int </span>max_pools;</td></tr>
+      <tr><td class="left"></td><td> </td><td class="right"></td></tr>
+      <tr><td class="left">               /** Maximum buffer data alignment in bytes */</td><td> </td><td class="right">               /** Maximum buffer data alignment in bytes */</td></tr>
+      <tr><td class="left">               uint32_t max_align;</td><td> </td><td class="right">               uint32_t max_align;</td></tr>
+      <tr><td class="left"></td><td> </td><td class="right"></td></tr>
+      <tr><td class="left">               /** Maximum buffer data size in bytes</td><td> </td><td class="right">               /** Maximum buffer data size in bytes</td></tr>
+      <tr><td class="left">                *</td><td> </td><td class="right">                *</td></tr>
+      <tr><td class="left">                * The value of zero means that size is limited only by the</td><td> </td><td class="right">                * The value of zero means that size is limited only by the</td></tr>
+      <tr><td class="left">                * available memory size for the pool. */</td><td> </td><td class="right">                * available memory size for the pool. */</td></tr>
+      <tr><td class="left">               uint32_t max_size;</td><td> </td><td class="right">               uint32_t max_size;</td></tr>
+      <tr><td class="left"></td><td> </td><td class="right"></td></tr>
+      <tr><td class="left">               /** Maximum number of buffers of any size</td><td> </td><td class="right">               /** Maximum number of buffers of any size</td></tr>
+      <tr><td class="left">                *</td><td> </td><td class="right">                *</td></tr>
+      <tr><td class="left">                * The value of zero means that limited only by the availabl
+e</td><td> </td><td class="right">                * The value of zero means that limited only by the availabl
+e</td></tr>
+      <tr><td class="left">                * memory size for the pool. */</td><td> </td><td class="right">                * memory size for the pool. */</td></tr>
+      <tr><td class="left">               uint32_t max_num;</td><td> </td><td class="right">               uint32_t max_num;</td></tr>
+      <tr><td class="left">       } buf;</td><td> </td><td class="right">       } buf;</td></tr>
+      <tr><td class="left"></td><td> </td><td class="right"></td></tr>
+      <tr><td class="left">       /** Packet pool capabilities  */</td><td> </td><td class="right">       /** Packet pool capabilities  */</td></tr>
+      <tr><td class="left">       struct {</td><td> </td><td class="right">       struct {</td></tr>
+      <tr><td class="left">               /** Maximum number of packet pools */</td><td> </td><td class="right">               /** Maximum number of packet pools */</td></tr>
+      <tr><td><a name="diff0003" /></td></tr>
+      <tr><td class="lblock">               unsigned max_pools;</td><td> </td><td class="rblock">               unsigned <span class="insert">int </span>max_pools;</td></tr>
+      <tr><td class="left"></td><td> </td><td class="right"></td></tr>
+      <tr><td class="left">               /** Maximum packet data length in bytes</td><td> </td><td class="right">               /** Maximum packet data length in bytes</td></tr>
+      <tr><td class="left">                *</td><td> </td><td class="right">                *</td></tr>
+      <tr><td class="left">                * This defines the maximum packet data length that can be</td><td> </td><td class="right">                * This defines the maximum packet data length that can be</td></tr>
+      <tr><td class="left">                * stored into a packet. Attempts to allocate or extend pack
+ets</td><td> </td><td class="right">                * stored into a packet. Attempts to allocate or extend pack
+ets</td></tr>
+      <tr><td class="left">                * to sizes larger than this limit will fail.</td><td> </td><td class="right">                * to sizes larger than this limit will fail.</td></tr>
+      <tr><td class="left">                *</td><td> </td><td class="right">                *</td></tr>
+      <tr><td class="left">                * The value of zero means that limited only by the availabl
+e</td><td> </td><td class="right">                * The value of zero means that limited only by the availabl
+e</td></tr>
+      <tr><td class="left">                * memory size for the pool. */</td><td> </td><td class="right">                * memory size for the pool. */</td></tr>
+      <tr><td class="left">               uint32_t max_len;</td><td> </td><td class="right">               uint32_t max_len;</td></tr>
+      <tr><td class="left"></td><td> </td><td class="right"></td></tr>
+      <tr bgcolor="gray" ><th><a name="part-l2" /><small>skipping to change at</small><em> line 150</em></th><th> </th><th><a name="part-r2" /><small>skipping to change at</small><em> line 150</em></th></tr>
+      <tr><td class="left">               /** Maximum number of subparameters</td><td> </td><td class="right">               /** Maximum number of subparameters</td></tr>
+      <tr><td class="left">                *</td><td> </td><td class="right">                *</td></tr>
+      <tr><td class="left">                *  Maximum number of packet pool subparameters. Valid range
+ is</td><td> </td><td class="right">                *  Maximum number of packet pool subparameters. Valid range
+ is</td></tr>
+      <tr><td class="left">                *  0 ... ODP_POOL_MAX_SUBPARAMS. */</td><td> </td><td class="right">                *  0 ... ODP_POOL_MAX_SUBPARAMS. */</td></tr>
+      <tr><td class="left">               uint8_t max_num_subparam;</td><td> </td><td class="right">               uint8_t max_num_subparam;</td></tr>
+      <tr><td class="left">       } pkt;</td><td> </td><td class="right">       } pkt;</td></tr>
+      <tr><td class="left"></td><td> </td><td class="right"></td></tr>
+      <tr><td class="left">       /** Timeout pool capabilities  */</td><td> </td><td class="right">       /** Timeout pool capabilities  */</td></tr>
+      <tr><td class="left">       struct {</td><td> </td><td class="right">       struct {</td></tr>
+      <tr><td class="left">               /** Maximum number of timeout pools */</td><td> </td><td class="right">               /** Maximum number of timeout pools */</td></tr>
+      <tr><td><a name="diff0004" /></td></tr>
+      <tr><td class="lblock">               unsigned max_pools;</td><td> </td><td class="rblock">               unsigned <span class="insert">int </span>max_pools;</td></tr>
+      <tr><td class="left"></td><td> </td><td class="right"></td></tr>
+      <tr><td class="left">               /** Maximum number of timeout events in a pool</td><td> </td><td class="right">               /** Maximum number of timeout events in a pool</td></tr>
+      <tr><td class="left">                *</td><td> </td><td class="right">                *</td></tr>
+      <tr><td class="left">                * The value of zero means that limited only by the availabl
+e</td><td> </td><td class="right">                * The value of zero means that limited only by the availabl
+e</td></tr>
+      <tr><td class="left">                * memory size for the pool. */</td><td> </td><td class="right">                * memory size for the pool. */</td></tr>
+      <tr><td class="left">               uint32_t max_num;</td><td> </td><td class="right">               uint32_t max_num;</td></tr>
+      <tr><td class="left">       } tmo;</td><td> </td><td class="right">       } tmo;</td></tr>
+      <tr><td class="left"></td><td> </td><td class="right"></td></tr>
+      <tr><td class="left">} odp_pool_capability_t;</td><td> </td><td class="right">} odp_pool_capability_t;</td></tr>
+      <tr><td class="left"></td><td> </td><td class="right"></td></tr>
+
+     <tr><td class="left"></td><td> </td><td class="right"></td></tr>
+     <tr bgcolor="gray"><th colspan="5" align="center"><a name="end">&nbsp;End of changes. 4 change blocks.&nbsp;</a></th></tr>
+     <tr class="stats"><th><i>4 lines changed or deleted</i></th><th><i> </i></th><th><i>4 lines changed or added</i></th></tr>
+     <tr><td colspan="5" align="center" class="small"></td></tr>
+   </table>
+   <br/><br/>
+ 
+  <table class='diff_tbl' border="0" cellpadding="0" cellspacing="0"> 
+  <tr bgcolor="orange"><th>&nbsp;shared_memory.h (1.22.0.0)&nbsp;</th><th> </th><th>&nbsp;shared_memory.h (1.23.0.0)&nbsp;</th></tr> 
+      <tr><td class="left"></td><td> </td><td class="right"></td></tr>
+      <tr bgcolor="gray" ><th><a name="part-l1" /><small>skipping to change at</small><em> line 109</em></th><th> </th><th><a name="part-r1" /><small>skipping to change at</small><em> line 109</em></th></tr>
+      <tr><td class="left">} odp_shm_info_t;</td><td> </td><td class="right">} odp_shm_info_t;</td></tr>
+      <tr><td class="left"></td><td> </td><td class="right"></td></tr>
+      <tr><td class="left">/**</td><td> </td><td class="right">/**</td></tr>
+      <tr><td class="left"> * Shared memory capabilities</td><td> </td><td class="right"> * Shared memory capabilities</td></tr>
+      <tr><td class="left"> */</td><td> </td><td class="right"> */</td></tr>
+      <tr><td class="left">typedef struct odp_shm_capability_t {</td><td> </td><td class="right">typedef struct odp_shm_capability_t {</td></tr>
+      <tr><td class="left">       /** Maximum number of shared memory blocks</td><td> </td><td class="right">       /** Maximum number of shared memory blocks</td></tr>
+      <tr><td class="left">        *</td><td> </td><td class="right">        *</td></tr>
+      <tr><td class="left">        * This number of separate shared memory blocks can be</td><td> </td><td class="right">        * This number of separate shared memory blocks can be</td></tr>
+      <tr><td class="left">        * reserved concurrently. */</td><td> </td><td class="right">        * reserved concurrently. */</td></tr>
+      <tr><td><a name="diff0001" /></td></tr>
+      <tr><td class="lblock">       unsigned max_blocks;</td><td> </td><td class="rblock">       unsigned <span class="insert">int </span>max_blocks;</td></tr>
+      <tr><td class="left"></td><td> </td><td class="right"></td></tr>
+      <tr><td class="left">       /** Maximum memory block size in bytes</td><td> </td><td class="right">       /** Maximum memory block size in bytes</td></tr>
+      <tr><td class="left">        *</td><td> </td><td class="right">        *</td></tr>
+      <tr><td class="left">        * The value of zero means that size is limited only by the availabl
+e</td><td> </td><td class="right">        * The value of zero means that size is limited only by the availabl
+e</td></tr>
+      <tr><td class="left">        * memory size. */</td><td> </td><td class="right">        * memory size. */</td></tr>
+      <tr><td class="left">       uint64_t max_size;</td><td> </td><td class="right">       uint64_t max_size;</td></tr>
+      <tr><td class="left"></td><td> </td><td class="right"></td></tr>
+      <tr><td class="left">       /** Maximum memory block alignment in bytes</td><td> </td><td class="right">       /** Maximum memory block alignment in bytes</td></tr>
+      <tr><td class="left">        *</td><td> </td><td class="right">        *</td></tr>
+      <tr><td class="left">        * The value of zero means that alignment is limited only by the</td><td> </td><td class="right">        * The value of zero means that alignment is limited only by the</td></tr>
+
+     <tr><td class="left"></td><td> </td><td class="right"></td></tr>
+     <tr bgcolor="gray"><th colspan="5" align="center"><a name="end">&nbsp;End of changes. 1 change blocks.&nbsp;</a></th></tr>
+     <tr class="stats"><th><i>1 lines changed or deleted</i></th><th><i> </i></th><th><i>1 lines changed or added</i></th></tr>
+     <tr><td colspan="5" align="center" class="small"></td></tr>
+   </table>
+   <br/><br/>
+ 
+  <table class='diff_tbl' border="0" cellpadding="0" cellspacing="0"> 
+  <tr bgcolor="orange"><th>&nbsp;version.h (1.22.0.0)&nbsp;</th><th> </th><th>&nbsp;version.h (1.23.0.0)&nbsp;</th></tr> 
+      <tr><td class="left"></td><td> </td><td class="right"></td></tr>
+      <tr bgcolor="gray" ><th><a name="part-l1" /><small>skipping to change at</small><em> line 47</em></th><th> </th><th><a name="part-r1" /><small>skipping to change at</small><em> line 47</em></th></tr>
+      <tr><td class="left"> * versions are likely not backward compatible.</td><td> </td><td class="right"> * versions are likely not backward compatible.</td></tr>
+      <tr><td class="left"> */</td><td> </td><td class="right"> */</td></tr>
+      <tr><td class="left">#define ODP_VERSION_API_GENERATION 1</td><td> </td><td class="right">#define ODP_VERSION_API_GENERATION 1</td></tr>
+      <tr><td class="left"></td><td> </td><td class="right"></td></tr>
+      <tr><td class="left">/**</td><td> </td><td class="right">/**</td></tr>
+      <tr><td class="left"> * ODP API major version</td><td> </td><td class="right"> * ODP API major version</td></tr>
+      <tr><td class="left"> *</td><td> </td><td class="right"> *</td></tr>
+      <tr><td class="left"> * Introduction of major new features or changes. APIs with different major</td><td> </td><td class="right"> * Introduction of major new features or changes. APIs with different major</td></tr>
+      <tr><td class="left"> * versions are likely not backward compatible.</td><td> </td><td class="right"> * versions are likely not backward compatible.</td></tr>
+      <tr><td class="left"> */</td><td> </td><td class="right"> */</td></tr>
+      <tr><td><a name="diff0001" /></td></tr>
+      <tr><td class="lblock">#define  ODP_VERSION_API_MAJOR 2<span class="delete">2</span></td><td> </td><td class="rblock">#define  ODP_VERSION_API_MAJOR 2<span class="insert">3</span></td></tr>
+      <tr><td class="left"></td><td> </td><td class="right"></td></tr>
+      <tr><td class="left">/**</td><td> </td><td class="right">/**</td></tr>
+      <tr><td class="left"> * ODP API minor version</td><td> </td><td class="right"> * ODP API minor version</td></tr>
+      <tr><td class="left"> *</td><td> </td><td class="right"> *</td></tr>
+      <tr><td class="left"> * Minor version is incremented when introducing backward compatible change
+s</td><td> </td><td class="right"> * Minor version is incremented when introducing backward compatible change
+s</td></tr>
+      <tr><td class="left"> * to the API. For an API with common generation and major version, but wit
+h</td><td> </td><td class="right"> * to the API. For an API with common generation and major version, but wit
+h</td></tr>
+      <tr><td class="left"> * different minor numbers the two versions are backward compatible.</td><td> </td><td class="right"> * different minor numbers the two versions are backward compatible.</td></tr>
+      <tr><td class="left"> */</td><td> </td><td class="right"> */</td></tr>
+      <tr><td class="left">#define ODP_VERSION_API_MINOR 0</td><td> </td><td class="right">#define ODP_VERSION_API_MINOR 0</td></tr>
+      <tr><td class="left"></td><td> </td><td class="right"></td></tr>
+
+     <tr><td class="left"></td><td> </td><td class="right"></td></tr>
+     <tr bgcolor="gray"><th colspan="5" align="center"><a name="end">&nbsp;End of changes. 1 change blocks.&nbsp;</a></th></tr>
+     <tr class="stats"><th><i>1 lines changed or deleted</i></th><th><i> </i></th><th><i>1 lines changed or added</i></th></tr>
+     <tr><td colspan="5" align="center" class="small"></td></tr>
+   </table>
+   <br/><br/>
+ 
+  <table class='diff_tbl' border="0" cellpadding="0" cellspacing="0"> 
+  <tr bgcolor="orange"><th>&nbsp;odph_debug.h (1.22.0.0)&nbsp;</th><th> </th><th>&nbsp;odph_debug.h (1.23.0.0)&nbsp;</th></tr> 
+      <tr><td class="left"></td><td> </td><td class="right"></td></tr>
+      <tr bgcolor="gray" ><th><a name="part-l1" /><small>skipping to change at</small><em> line 18</em></th><th> </th><th><a name="part-r1" /><small>skipping to change at</small><em> line 18</em></th></tr>
+      <tr><td class="left"></td><td> </td><td class="right"></td></tr>
+      <tr><td class="left">/**</td><td> </td><td class="right">/**</td></tr>
+      <tr><td class="left"> * @file</td><td> </td><td class="right"> * @file</td></tr>
+      <tr><td class="left"> *</td><td> </td><td class="right"> *</td></tr>
+      <tr><td class="left"> * Helper debug</td><td> </td><td class="right"> * Helper debug</td></tr>
+      <tr><td class="left"> */</td><td> </td><td class="right"> */</td></tr>
+      <tr><td class="left"></td><td> </td><td class="right"></td></tr>
+      <tr><td class="left">#ifndef ODPH_DEBUG_H_</td><td> </td><td class="right">#ifndef ODPH_DEBUG_H_</td></tr>
+      <tr><td class="left">#define ODPH_DEBUG_H_</td><td> </td><td class="right">#define ODPH_DEBUG_H_</td></tr>
+      <tr><td class="left"></td><td> </td><td class="right"></td></tr>
+      <tr><td><a name="diff0001" /></td></tr>
+      <tr><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">#include &lt;odp/autoheader_external.h&gt;</span></td></tr>
+      <tr><td class="lblock"></td><td> </td><td class="rblock">                                                                           </td></tr>
+      <tr><td class="left">#include &lt;stdio.h&gt;</td><td> </td><td class="right">#include &lt;stdio.h&gt;</td></tr>
+      <tr><td class="left">#include &lt;stdlib.h&gt;</td><td> </td><td class="right">#include &lt;stdlib.h&gt;</td></tr>
+      <tr><td class="left"></td><td> </td><td class="right"></td></tr>
+      <tr><td class="left">#ifdef __cplusplus</td><td> </td><td class="right">#ifdef __cplusplus</td></tr>
+      <tr><td class="left">extern "C" {</td><td> </td><td class="right">extern "C" {</td></tr>
+      <tr><td class="left">#endif</td><td> </td><td class="right">#endif</td></tr>
+      <tr><td class="left"></td><td> </td><td class="right"></td></tr>
+      <tr><td><a name="diff0002" /></td></tr>
+      <tr><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">/** @addtogroup odph_debug ODPH DEBUG</span></td></tr>
+      <tr><td class="lblock"></td><td> </td><td class="rblock"><span class="insert"> *  @{</span></td></tr>
+      <tr><td class="lblock"></td><td> </td><td class="rblock"><span class="insert"> */</span></td></tr>
+      <tr><td class="lblock"></td><td> </td><td class="rblock">                                                                           </td></tr>
+      <tr><td class="left">/**</td><td> </td><td class="right">/**</td></tr>
+      <tr><td class="left"> * Assert macro for applications and helper code</td><td> </td><td class="right"> * Assert macro for applications and helper code</td></tr>
+      <tr><td class="left"> *</td><td> </td><td class="right"> *</td></tr>
+      <tr><td class="left"> * No code is generated when ODPH_DEBUG=0. Prints error message and aborts 
+when</td><td> </td><td class="right"> * No code is generated when ODPH_DEBUG=0. Prints error message and aborts 
+when</td></tr>
+      <tr><td class="left"> * ODPH_DEBUG=1 and 'cond' is false.</td><td> </td><td class="right"> * ODPH_DEBUG=1 and 'cond' is false.</td></tr>
+      <tr><td class="left"> */</td><td> </td><td class="right"> */</td></tr>
+      <tr><td class="left">#define ODPH_ASSERT(cond) \</td><td> </td><td class="right">#define ODPH_ASSERT(cond) \</td></tr>
+      <tr><td class="left">       do { \</td><td> </td><td class="right">       do { \</td></tr>
+      <tr><td class="left">               if ((ODPH_DEBUG == 1) &amp;&amp; (!(cond))) { \</td><td> </td><td class="right">               if ((ODPH_DEBUG == 1) &amp;&amp; (!(cond))) { \</td></tr>
+      <tr><td class="left">                       fprintf(stderr, "%s:%d:%s(): %s\n", __FILE__, __LINE
+__,\</td><td> </td><td class="right">                       fprintf(stderr, "%s:%d:%s(): %s\n", __FILE__, __LINE
+__,\</td></tr>
+      <tr><td class="left"></td><td> </td><td class="right"></td></tr>
+      <tr bgcolor="gray" ><th><a name="part-l2" /><small>skipping to change at</small><em> line 98</em></th><th> </th><th><a name="part-r2" /><small>skipping to change at</small><em> line 104</em></th></tr>
+      <tr><td class="left"> * Print output to stderr (file, line and function),</td><td> </td><td class="right"> * Print output to stderr (file, line and function),</td></tr>
+      <tr><td class="left"> * then abort.</td><td> </td><td class="right"> * then abort.</td></tr>
+      <tr><td class="left"> */</td><td> </td><td class="right"> */</td></tr>
+      <tr><td class="left">#define ODPH_ABORT(fmt, ...) \</td><td> </td><td class="right">#define ODPH_ABORT(fmt, ...) \</td></tr>
+      <tr><td class="left">               ODPH_LOG(ODPH_LOG_ABORT, fmt, ##__VA_ARGS__)</td><td> </td><td class="right">               ODPH_LOG(ODPH_LOG_ABORT, fmt, ##__VA_ARGS__)</td></tr>
+      <tr><td class="left"></td><td> </td><td class="right"></td></tr>
+      <tr><td class="left">/**</td><td> </td><td class="right">/**</td></tr>
+      <tr><td class="left"> * @}</td><td> </td><td class="right"> * @}</td></tr>
+      <tr><td class="left"> */</td><td> </td><td class="right"> */</td></tr>
+      <tr><td class="left"></td><td> </td><td class="right"></td></tr>
+      <tr><td><a name="diff0003" /></td></tr>
+      <tr><td class="lblock"><span class="delete">/**</span></td><td> </td><td class="rblock"></td></tr>
+      <tr><td class="lblock"><span class="delete"> * Mark intentionally unused argument for functions</span></td><td> </td><td class="rblock"></td></tr>
+      <tr><td class="lblock"><span class="delete"> */</span></td><td> </td><td class="rblock"></td></tr>
+      <tr><td class="lblock"><span class="delete">#define ODPH_UNUSED     __attribute__((__unused__))</span></td><td> </td><td class="rblock"></td></tr>
+      <tr><td class="lblock">                                                                           </td><td> </td><td class="rblock"></td></tr>
+      <tr><td class="left">#ifdef __cplusplus</td><td> </td><td class="right">#ifdef __cplusplus</td></tr>
+      <tr><td class="left">}</td><td> </td><td class="right">}</td></tr>
+      <tr><td class="left">#endif</td><td> </td><td class="right">#endif</td></tr>
+      <tr><td class="left"></td><td> </td><td class="right"></td></tr>
+      <tr><td class="left">#endif</td><td> </td><td class="right">#endif</td></tr>
+
+     <tr><td class="left"></td><td> </td><td class="right"></td></tr>
+     <tr bgcolor="gray"><th colspan="5" align="center"><a name="end">&nbsp;End of changes. 3 change blocks.&nbsp;</a></th></tr>
+     <tr class="stats"><th><i>5 lines changed or deleted</i></th><th><i> </i></th><th><i>6 lines changed or added</i></th></tr>
+     <tr><td colspan="5" align="center" class="small"></td></tr>
+   </table>
+   <br/><br/>
+ 
+  <table class='diff_tbl' border="0" cellpadding="0" cellspacing="0"> 
+  <tr bgcolor="orange"><th>&nbsp;version.h (1.22.0.0)&nbsp;</th><th> </th><th>&nbsp;version.h (1.23.0.0)&nbsp;</th></tr> 
+      <tr><td class="left"></td><td> </td><td class="right"></td></tr>
+      <tr bgcolor="gray" ><th><a name="part-l1" /><small>skipping to change at</small><em> line 49</em></th><th> </th><th><a name="part-r1" /><small>skipping to change at</small><em> line 49</em></th></tr>
+      <tr><td class="left"> */</td><td> </td><td class="right"> */</td></tr>
+      <tr><td class="left">#define  ODPH_VERSION_MAJOR 0</td><td> </td><td class="right">#define  ODPH_VERSION_MAJOR 0</td></tr>
+      <tr><td class="left"></td><td> </td><td class="right"></td></tr>
+      <tr><td class="left">/**</td><td> </td><td class="right">/**</td></tr>
+      <tr><td class="left"> * ODP helper minor version</td><td> </td><td class="right"> * ODP helper minor version</td></tr>
+      <tr><td class="left"> *</td><td> </td><td class="right"> *</td></tr>
+      <tr><td class="left"> * Minor version is incremented when introducing backward compatible change
+s.</td><td> </td><td class="right"> * Minor version is incremented when introducing backward compatible change
+s.</td></tr>
+      <tr><td class="left"> * Helper libraries with common generation and major version, but with</td><td> </td><td class="right"> * Helper libraries with common generation and major version, but with</td></tr>
+      <tr><td class="left"> * different minor version numbers are backward compatible.</td><td> </td><td class="right"> * different minor version numbers are backward compatible.</td></tr>
+      <tr><td class="left"> */</td><td> </td><td class="right"> */</td></tr>
+      <tr><td><a name="diff0001" /></td></tr>
+      <tr><td class="lblock">#define ODPH_VERSION_MINOR <span class="delete">2</span></td><td> </td><td class="rblock">#define ODPH_VERSION_MINOR <span class="insert">3</span></td></tr>
+      <tr><td class="left"></td><td> </td><td class="right"></td></tr>
+      <tr><td class="left">/**</td><td> </td><td class="right">/**</td></tr>
+      <tr><td class="left"> * ODP helper version string</td><td> </td><td class="right"> * ODP helper version string</td></tr>
+      <tr><td class="left"> *</td><td> </td><td class="right"> *</td></tr>
+      <tr><td class="left"> * The version string defines the helper library version in this format:</td><td> </td><td class="right"> * The version string defines the helper library version in this format:</td></tr>
+      <tr><td class="left"> * @verbatim &lt;generation&gt;.&lt;major&gt;.&lt;minor&gt; @endverbatim</td><td> </td><td class="right"> * @verbatim &lt;generation&gt;.&lt;major&gt;.&lt;minor&gt; @endverbatim</td></tr>
+      <tr><td class="left"> *</td><td> </td><td class="right"> *</td></tr>
+      <tr><td class="left"> * The string is null terminated.</td><td> </td><td class="right"> * The string is null terminated.</td></tr>
+      <tr><td class="left"> *</td><td> </td><td class="right"> *</td></tr>
+      <tr><td class="left"> * @return Pointer to helper library version string</td><td> </td><td class="right"> * @return Pointer to helper library version string</td></tr>
+
+     <tr><td class="left"></td><td> </td><td class="right"></td></tr>
+     <tr bgcolor="gray"><th colspan="5" align="center"><a name="end">&nbsp;End of changes. 1 change blocks.&nbsp;</a></th></tr>
+     <tr class="stats"><th><i>1 lines changed or deleted</i></th><th><i> </i></th><th><i>1 lines changed or added</i></th></tr>
+     <tr><td colspan="5" align="center" class="small"></td></tr>
+   </table>
+   <br/><div style='width:100%;' align='left' class='small'>This html diff was produced by rfcdiff 1.41.The latest version is available from <a href='http://tools.ietf.org/tools/rfcdiff/'>http://tools.ietf.org/tools/rfcdiff/</a></div>
+</td></tr></table>
+</body>
+</html>
